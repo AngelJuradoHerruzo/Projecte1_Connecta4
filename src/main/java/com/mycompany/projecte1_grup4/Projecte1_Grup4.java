@@ -2,6 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
+/*
+* Classe principal del joc
+*/
 package com.mycompany.projecte1_grup4;
 
 /**
