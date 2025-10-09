@@ -8,6 +8,6 @@ package game;
  *
  * @author angel
  */
-public class Info {
+public class Execucio {
     
 }
