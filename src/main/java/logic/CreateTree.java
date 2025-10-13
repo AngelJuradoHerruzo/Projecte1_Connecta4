@@ -23,7 +23,7 @@ public class CreateTree {
                 node.addhijo(hijo);
                 
                 char siguientejugador = (jugador == 'X')?'O' : 'X';
-                createTree(hijo, siguientejugador, profundidad + 1, maxProfundidad);
+                treeGeneration(hijo, siguientejugador, profundidad + 1, maxProfundidad);
                 
                 
             }
