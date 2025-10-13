@@ -22,4 +22,21 @@ public class Casella {
             return simbol;
         }
     }
+    
+    private Estat estat;
+    
+    //CONSTRUCTOR
+    public Casella() {
+        this.estat = Estat.BUIDA; // La casella està buida per defecte
+    }
+    
+    //GETTER
+    public Estat getEstat() {
+        return estat;
+    }
+    
+    //SETTER
+    public void setEstat(Estat estat) {
+        this.estat = estat;
+    }
 }
