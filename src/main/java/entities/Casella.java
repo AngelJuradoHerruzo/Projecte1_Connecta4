@@ -9,8 +9,8 @@ public class Casella {
     //ESTATS POSSIBLES DE LA CASELLA
     public enum Estat {
         BUIDA("-"),
-        USUARI("O"),
-        IA("X");
+        JUGADOR_1("O"),
+        JUGADOR_2("X");
         
         private final String simbol;
         
