@@ -1,9 +1,9 @@
 package entities;
 
 /**
- *
- * @author crono
+ * @author Ángel Jurado Herruzo
  */
+
 public class Jugador {
     
 }

@@ -1,9 +1,9 @@
 package entities;
 
 /**
- *
- * @author angel
+ * @author Ángel Jurado Herruzo
  */
+
 public class Tauler {
     
 }
