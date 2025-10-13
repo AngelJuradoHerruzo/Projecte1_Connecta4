@@ -39,4 +39,15 @@ public class Casella {
     public void setEstat(Estat estat) {
         this.estat = estat;
     }
+    
+    
+    //MÈTODE PER OBTENIR EL SÍMBOL DE LA CASELLA
+    public String getSimbol() { // Torna l'estat actual de la casella
+        return estat.getSimbol();
+    }
+    
+    @Override
+    public String toString() {
+        return getSimbol(); // Sobreescriu toString() i torna el símbol
+    }
 }
