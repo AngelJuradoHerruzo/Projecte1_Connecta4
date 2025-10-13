@@ -31,18 +31,26 @@ public class Tauler {
         this.columnes = columnes;
         inicialitzarTauler(); // Crida el mètode
     }
+      
     
-    private void inicialitzarTauler() {}
+    /**************    MÈTODE D'INICIALITZACIÓ.    **************
+     * Inicialitza el tauler creant totes les caselles i establint-les com a buides.
+     * Aquest mètode és cridat pels constructors per preparar el tauler per al joc.
+     */
+    
+    private void inicialitzarTauler() {
+        caselles = new Casella[files][columnes]; // Crear la matriu amb les dimensions especificades
+        
+        for (int i = 0; i < files; i++) { // Omplir tot el tauler amb caselles buides
+            for (int j = 0; j < columnes; j++) {
+                caselles[i][j] = new Casella();
+            }
+        }
+    }
     
     
     
-    
-    
-    
-    
-    
-    
-    
+     
     
     
     
