@@ -17,6 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 public class logicTest {
     
+    private tauler t;
     
      @BeforeAll
     public static void setUpClass() {
@@ -43,76 +44,103 @@ public class logicTest {
     void testInicialitzacioNoNula() {
         // Comprova que totes les caselles del tauler s’inicialitzen correctament
         // i que cap sigui null ni buida sense estat.
+        
+        for (int fila = 0; fila < t.getFiles(); fila++) {
+            for (int col = 0; col < t.getColumnes(); col++) {
+                casella c = t.getCasella(fila, col);
+                assertNotNull(c, "La casella no hauria de ser null");
+                assertEquals(Estat.BUIDA, c.getEstat(), "Les caselles noves haurien d'estar buides");
+            }
+        }
     }
 
-    @Test
+     @Test
     void testDimensionsPerDefecte() {
-        // Comprova que el tauler per defecte és de 6 files × 7 columnes.
+        assertEquals(6, t.getFiles(), "El tauler per defecte hauria de tenir 6 files");
+        assertEquals(7, t.getColumnes(), "El tauler per defecte hauria de tenir 7 columnes");
     }
 
     @Test
     void testDimensionsPersonalitzades() {
-        // Crea un tauler de 4×4 i comprova que:
-        //  - getFiles() == 4
-        //  - getColumnes() == 4
-        //  - una casella dins dels límits no és null.
+        tauler t2 = new tauler(4, 4);
+        assertEquals(4, t2.getFiles(), "El tauler personalitzat hauria de tenir 4 files");
+        assertEquals(4, t2.getColumnes(), "El tauler personalitzat hauria de tenir 4 columnes");
+        assertNotNull(t2.getCasella(0, 0), "Una casella dins dels límits no pot ser null");
     }
 
     @Test
     void testColocarFitxaColumnaValida() {
-        // Col·loca una fitxa a la columna 3 i comprova que:
-        //  - el mètode retorna true
-        //  - la fitxa apareix a la fila inferior (fila 5).
+        boolean resultat = t.colocarFitxa(3, Estat.JUGADOR);
+        assertTrue(resultat, "Hauria de permetre col·locar una fitxa en una columna vàlida");
+
+        int filaInferior = t.getFiles() - 1;
+        casella c = t.getCasella(filaInferior, 3);
+        assertEquals(Estat.JUGADOR, c.getEstat(), "La fitxa s'hauria de col·locar a la fila inferior");
     }
 
     @Test
     void testColocarFitxaColumnaPlena() {
-        // Omple completament una columna
-        // i comprova que al intentar afegir-ne una més retorna false.
+        int col = 2;
+        for (int i = 0; i < t.getFiles(); i++) {
+            assertTrue(t.colocarFitxa(col, Estat.MAQUINA));
+        }
+        assertFalse(t.colocarFitxa(col, Estat.MAQUINA), "No hauria de permetre afegir més fitxes a una columna plena");
     }
 
     @Test
     void testColocarFitxaColumnaInvalida() {
-        // Intenta col·locar una fitxa en una columna fora de rang (-1 o 10)
-        // i comprova que retorna false.
+        assertFalse(t.colocarFitxa(-1, Estat.JUGADOR), "Columna negativa no vàlida");
+        assertFalse(t.colocarFitxa(10, Estat.JUGADOR), "Columna fora de rang no vàlida");
     }
 
     @Test
     void testJugadaUsuariIA() {
-        // Fes una jugada d’usuari i una d’IA.
-        // Comprova que les caselles canviïn d’estat correctament:
-        // USUARI (O) i IA (X).
+        assertTrue(t.colocarFitxa(0, Estat.JUGADOR));
+        assertTrue(t.colocarFitxa(1, Estat.MAQUINA));
+
+        casella c1 = t.getCasella(t.getFiles() - 1, 0);
+        casella c2 = t.getCasella(t.getFiles() - 1, 1);
+
+        assertEquals(Estat.JUGADOR, c1.getEstat(), "Casella de jugador hauria de tenir 'JUGADOR'");
+        assertEquals(Estat.MAQUINA, c2.getEstat(), "Casella de màquina hauria de tenir 'MAQUINA'");
     }
 
     @Test
     void testTaulerPle() {
-        // Omple tot el tauler i comprova que:
-        //  - estaPle() == true
-        // Deixa una casella buida i comprova que:
-        //  - estaPle() == false
+        for (int c = 0; c < t.getColumnes(); c++) {
+            for (int f = 0; f < t.getFiles(); f++) {
+                t.colocarFitxa(c, Estat.JUGADOR);
+            }
+        }
+        assertTrue(t.estaPle(), "El tauler hauria d'estar ple");
+
+        // Buidem una casella manualment
+        t.getCasella(0, 0).setEstat(Estat.BUIDA);
+        assertFalse(t.estaPle(), "El tauler no hauria d'estar ple si hi ha una casella buida");
     }
 
     @Test
     void testGetCasellaValida() {
-        // Comprova que una casella dins de límits (per ex. 0,0)
-        // retorna un objecte Casella no null.
+        casella c = t.getCasella(0, 0);
+        assertNotNull(c, "Una casella dins dels límits no pot ser null");
     }
 
     @Test
     void testGetCasellaInvalida() {
-        // Prova d’accedir a una casella fora dels límits (per ex. fila 10, col 3)
-        // i comprova que retorna null.
+        assertNull(t.getCasella(10, 3), "Fora dels límits hauria de retornar null");
+        assertNull(t.getCasella(-1, 2), "Fora dels límits (negatiu) hauria de retornar null");
     }
 
     @Test
     void testObtenirRepresentacioTextual() {
-        // Comprova que la representació textual conté:
-        //  - 6 files (salt de línia per cada una)
-        //  - 7 columnes amb símbols "-"
-        //  - No és buida ni null.
+        String representacio = t.toString();
+        assertNotNull(representacio, "La representació textual no pot ser null");
+        assertFalse(representacio.isEmpty(), "La representació no pot estar buida");
+
+        String[] files = representacio.split("\n");
+        assertEquals(6, files.length, "El tauler per defecte hauria de tenir 6 línies");
+        assertTrue(files[0].contains("-"), "Cada fila hauria de contenir símbols '-' per caselles buides");
     }
-    
-    
-   
     }
-}
+    }
+
