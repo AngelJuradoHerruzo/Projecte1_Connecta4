@@ -85,7 +85,7 @@ public class Tauler {
      * 
      * @param columna Columna on es vol col·locar la fitxa (0-based)
      * @param jugador Tipus de jugador (USUARI O IA)
-     * @return True --> Jugada realitzada correctament. False --> Columna plena o és invàlida.
+     * @return True: Jugada realitzada correctament. False: Columna plena o és invàlida.
      */
     
     public boolean colocarFitxa(int columna, Casella.Estat jugador) {
@@ -111,9 +111,23 @@ public class Tauler {
     }
     
     
+    /**************    MÈTODES D'ESTAT DEL TAULER.    **************
+     * Comprova si el tauler està completament ple (Empat).
+     * El tauler està ple quan totes les caselles de la fila superior estan ocupades.
+     * 
+     * @return True: Tauler està ple. False: Hi ha caselles buides.
+     */
     
-    
-    
+    public boolean estaPle() {
+        for (int j = 0; j < columnes; j++) { // Comprovar cada columna de la fila superior (Fila 0)
+            
+            if (caselles[0][j].estaBuida()) { // Si la casella buida a la fila superior
+                return false; // El tauler no està ple
+            }
+        }
+        return true; // Totes les columnes de la fila superior estan plenes
+    }
+ 
     
     
 }
