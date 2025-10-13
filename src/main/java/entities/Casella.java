@@ -46,6 +46,11 @@ public class Casella {
         return estat.getSimbol();
     }
     
+    //MÈTODE PER VERIFICAR SI LA CASELLA ESTÀ BUIDA
+    public boolean estaBuida() {
+        return estat == Estat.BUIDA;
+    }
+    
     @Override
     public String toString() {
         return getSimbol(); // Sobreescriu toString() i torna el símbol
