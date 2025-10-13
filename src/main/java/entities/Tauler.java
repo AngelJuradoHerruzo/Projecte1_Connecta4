@@ -79,14 +79,40 @@ public class Tauler {
     }
     
     
+    /**************    MÈTODES PER A COL·LOCAR FITXES.    **************
+     * Intenta col·locar una fitxa a la columna especificada per al jugador indicat.
+     * La fitxa cau a la primera posició buida des de baix de la columna.
+     * 
+     * @param columna Columna on es vol col·locar la fitxa (0-based)
+     * @param jugador Tipus de jugador (USUARI O IA)
+     * @return True --> Jugada realitzada correctament. False --> Columna plena o és invàlida.
+     */
+    
+    public boolean colocarFitxa(int columna, Casella.Estat jugador) {
+        if (columna < 0 || columna >= columnes) { // Verificar si la columna existeix al tauler
+            return false; // Columna invàlida
+        }
+        
+        for (int fila = files - 1; fila >= 0; fila--) { // Recórrer la columna de baix a dalt
+            if (caselles[fila][columna].estaBuida()) {  // Si trobem una casella buida, hi col·loquem la fitxa
+                caselles[fila][columna].setEstat(jugador);
+                return true; // Jugada realitzada amb èxit
+            }
+        }
+        return false; // Columna plena, jugada invàlida
+    }
+    
+    public boolean jugadaJugador_1(int columna) { // Realitzar una jugada del JUGADOR_1
+        return colocarFitxa(columna, Casella.Estat.JUGADOR_1);
+    }
+    
+    public boolean jugadaJugador_2(int columna) { // Realitzar una jugada del JUGADOR_2
+        return colocarFitxa(columna, Casella.Estat.JUGADOR_2);
+    }
     
     
     
     
-    
-    
-    
-     
     
     
     
