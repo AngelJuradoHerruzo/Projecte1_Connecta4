@@ -10,7 +10,7 @@ public class Tauler {
     private int columnes;           // Nombre de columnes: 7
     
     
-    /**************    GETTERS.    **************
+    /**************    .GETTERS.    **************
      * Inicialitza el tauler creant totes les caselles i establint-les com a buides.
      * Aquest mètode és cridat pels constructors per preparar el tauler per al joc.
      */
@@ -41,7 +41,7 @@ public class Tauler {
     }
     
     
-    /**************    CONSTRUCTORS.    **************
+    /**************    .CONSTRUCTORS.    **************
      * Constructors per crear un tauler de Conecta 4.
      * Per defecte: 6 Files × 7 Columnes.
      * També es pot especificar un nombre personalitzat de files i columnes.
@@ -63,7 +63,7 @@ public class Tauler {
     }
       
     
-    /**************    MÈTODE D'INICIALITZACIÓ.    **************
+    /**************    .MÈTODE D'INICIALITZACIÓ.    **************
      * Inicialitza el tauler creant totes les caselles i establint-les com a buides.
      * Aquest mètode és cridat pels constructors per preparar el tauler per al joc.
      */
@@ -79,7 +79,7 @@ public class Tauler {
     }
     
     
-    /**************    MÈTODES PER A COL·LOCAR FITXES.    **************
+    /**************    .MÈTODES PER A COL·LOCAR FITXES.    **************
      * Intenta col·locar una fitxa a la columna especificada per al jugador indicat.
      * La fitxa cau a la primera posició buida des de baix de la columna.
      * 
@@ -111,7 +111,7 @@ public class Tauler {
     }
     
     
-    /**************    MÈTODES D'ESTAT DEL TAULER.    **************
+    /**************    .MÈTODES D'ESTAT DEL TAULE.    **************
      * Comprova si el tauler està completament ple (Empat).
      * El tauler està ple quan totes les caselles de la fila superior estan ocupades.
      * 
@@ -127,7 +127,74 @@ public class Tauler {
         }
         return true; // Totes les columnes de la fila superior estan plenes
     }
- 
     
     
+    /**************    .MÈTODES DE VISUALITZACIÓ.    **************
+     * Mostra el tauler actual per la consola amb un format llegible.
+     * Utilitza els símbols de cada casella per representar l'estat del joc.
+     */
+    
+    public void mostrarTauler() {
+        System.out.println("-------------------------- TAULER ACTUAL --------------------------\n");
+
+        
+        //IMPRIMIR CAPÇALERA DE COLUMNES
+        System.out.print("       |");
+        for (int j = 0; j < columnes; j++) {
+            System.out.print(" Col " + (j + 1) + " |");
+        }
+        System.out.println();
+
+        
+        //IMPRIMIR LINIA SEPARADORA DE CAPÇALERA
+        System.out.print("-------|");
+        for (int j = 0; j < columnes; j++) {
+            System.out.print("-------|");
+        }
+        System.out.println();
+
+        
+        //IMPRIMIR CADA FILA DEL TAULER
+        for (int i = 0; i < files; i++) {
+            System.out.print("Fila " + (files - i) + " |"); // Nom de la fila
+
+            for (int j = 0; j < columnes; j++) { // Contingut de cada casella de la fila
+                String simbol = caselles[i][j].getSimbol();
+                System.out.print("   " + simbol + "   |");
+            }
+            System.out.println();
+
+            System.out.print("-------|"); // Linia separadora entre files
+            for (int j = 0; j < columnes; j++) {
+                System.out.print("-------|");
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
 }
+
+
+
+
+
+/**  REPRESENTACIÓ DEL TAULER.
+
+-------------------------- TAULER ACTUAL --------------------------
+
+       | Col 1 | Col 2 | Col 3 | Col 4 | Col 5 | Col 6 | Col 7 |
+-------|-------|-------|-------|-------|-------|-------|-------|
+Fila 6 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+-------|-------|-------|-------|-------|-------|-------|-------|
+Fila 5 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+-------|-------|-------|-------|-------|-------|-------|-------|
+Fila 4 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+-------|-------|-------|-------|-------|-------|-------|-------|
+Fila 3 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+-------|-------|-------|-------|-------|-------|-------|-------|
+Fila 2 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+-------|-------|-------|-------|-------|-------|-------|-------|
+Fila 1 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+-------|-------|-------|-------|-------|-------|-------|-------|
+
+**/
