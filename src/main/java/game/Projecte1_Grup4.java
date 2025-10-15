@@ -4,7 +4,6 @@
 
 package game;
 
-import static game.Execucio.infoInici;
 import java.util.Scanner;
 
 /**
@@ -15,10 +14,11 @@ public class Projecte1_Grup4 {
 
     public static void main(String[] args) {
          Scanner scanner = new Scanner(System.in); // solo un scanner
-        Execucio joc = new Execucio();       // creamos el objeto del juego
+                GameText jocText = new GameText();       // para usar metodos de otras clases
+                Mecanica jocMecanica = new Mecanica();  // para usar metodos de otras clases
 
-        infoInici();                          // mostramos instrucciones
-        joc.demanarNom(scanner);                   // pedimos el nombre usando el mismo scanner
+        jocText.infoInici();                          // mostramos instrucciones
+        jocText.demanarNom(scanner);                   // pedimos el nombre usando el mismo scanner
 
     }
 }
