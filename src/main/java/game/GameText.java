@@ -32,18 +32,25 @@ public class GameText {
     public void mostrarTorn(Mecanica game){
     System.out.println("Torn actual" + game.getTornActual());
     }
+    public void mostrarTornPj(){
+        System.out.println("És el torn de "+pjName);
+    }
+    public void mostrarTornCPU(){
+        System.out.println("És el torn de la CPU");
+    }
     public void columnaPlenaText(Mecanica game){
         System.out.println("Aquesta columna ("+game.getColumnaNovaFicha()+") esta plena, si us plau seleccioni una altra");
     }
     public void columnaInvalidaText(Mecanica game){
         System.out.println("Aquesta columna ("+game.getColumnaNovaFicha()+") no és una jugada valida, si us plau seleccioni un nombre entre 1-7");
     }
-    public void columnaEscollidaPjText(int columnaNovaFicha){
-        System.out.println(pjName+ " ha escollit la columna: "+columnaNovaFicha);
+    public void columnaEscollidaPjText(Mecanica game){
+        System.out.println(pjName+ " ha escollit la columna: "+game.getColumnaNovaFicha());
     }
-    public void columnaEscollidaCPUText(int columnaNovaFicha){
-        System.out.println("La CPU ha escollit la columna: "+columnaNovaFicha);
+    public void columnaEscollidaCPUText(Mecanica game){
+        System.out.println("La CPU ha escollit la columna: "+game.getColumnaNovaFicha());
     }
+    
     public void pjWinnerText(){
         System.out.println(pjName + " ha guanyat!");
     }
