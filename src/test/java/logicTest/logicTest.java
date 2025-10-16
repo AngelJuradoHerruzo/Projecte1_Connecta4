@@ -144,7 +144,7 @@ public class logicTest {
     
     // BLOC 2 — TESTS DE CREATETREE
     
-    void testGeneraHijosCorrectament() {
+    void testGeneraFillsCorrectament() {
         // Crea un Node amb un tauler buit
         // Executa treeGeneration(node, 'X', 0, 1)
         // Comprova que es generen x fills (un per cada columna possible).
