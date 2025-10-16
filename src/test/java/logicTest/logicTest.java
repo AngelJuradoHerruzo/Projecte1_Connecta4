@@ -148,33 +148,77 @@ public class logicTest {
         // Crea un Node amb un tauler buit
         // Executa treeGeneration(node, 'X', 0, 1)
         // Comprova que es generen x fills (un per cada columna possible).
+        CreateTree.treeGeneration(node, 'X', 0, 1);
+        assertEquals(t.getColumnes(), node.getFills().size(), "S'han de generar 6 fills per un tauler buit");
     }
     @Test
     void testNoGeneraSiColumnaPlena() {
         // Omple una columna i comprova que CreateTree
         // no genera cap fill per aquella columna plena.
+        for (int f = 0; f < t.getFiles(); f++) {
+            t.colocarFitxa(0, Estat.JUGADOR);
+        }
+        CreateTree.treeGeneration(node, 'X', 0, 1);
+
+        boolean columnaPlenaGeneraFill = false;
+        for (Node f : node.getFills()) {
+            if (f.getTauler().getCasella(t.getFiles() - 1, 0).getEstat() != Estat.BUIDA) {
+                columnaPlenaGeneraFill = true;
+            }
+        }
+        assertFalse(columnaPlenaGeneraFill, "No s'ha de generar node fill per columna plena");
     }
 
     @Test
     void testAlternanciaJugadors() {
         // Comprova que si el node pare és 'X',
         // els fills generats són del jugador 'O'.
+        CreateTree.treeGeneration(node, 'X', 0, 1);
+
+        for (Node f : node.getFills()) {
+            char jugadorSeguent = f.getTauler().getCasella(
+                    t.getFiles() - 1, node.getFills().indexOf(f)
+            ).getSimbol();
+            assertEquals('O', jugadorSeguent, "El jugador del fill hauria de ser 'O'");
+        }
     }
 
     @Test
     void testLimitDeProfunditat() {
         // Crida treeGeneration amb maxProfunditat = 2
         // i comprova que cap node s’ha generat amb profunditat > 2.
+        CreateTree.treeGeneration(node, 'X', 0, 2);
+
+        boolean profunditatMajor2 = false;
+        for (Node f : node.getFills()) {
+            for (Node ff : f.getFills()) {
+                for (Node fff : ff.getFills()) {
+                    profunditatMajor2 = true;
+                }
+            }
+        }
+        assertFalse(profunditatMajor2, "No s'ha de generar cap node amb profunditat > 2");
     }
 
     @Test
     void testCopiaDeTaulerIndependent() {
         // Comprova que els taulers dels fills són còpies independents:
         // si modifiques un fill, el tauler del pare no canvia.
+        CreateTree.treeGeneration(node, 'X', 0, 1);
+
+        Node primerFill = node.getFills().get(0);
+        primerFill.getTauler().colocarFitxa(0, Estat.JUGADOR); // Modifiquem el fill
+
+        assertEquals(Estat.BUIDA, node.getTauler().getCasella(t.getFiles() - 1, 0).getEstat(),
+                "El tauler del pare no hauria de canviar si modifiquem un fill");
     }
 
     @Test
     void testNumeroMaximDeFills() {
-        // Comprova que cap node té més de 7 fills.
+        // Comprova que cap node té més de 6 fills.
+        CreateTree.treeGeneration(node, 'X', 0, 1);
+
+        for (Node f : node.getFills()) {
+            assertTrue(f.getFills().size() <= 7, "Cap node fill hauria de tenir més de 7 fills");
+        }
     }
-}
