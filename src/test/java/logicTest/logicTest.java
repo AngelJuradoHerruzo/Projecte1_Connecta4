@@ -16,36 +16,35 @@ import static org.junit.jupiter.api.Assertions.*;
  * @author angel
  */
 public class logicTest {
-    
-    private tauler t;
-    
-     @BeforeAll
+
+    private Tauler t;
+
+    @BeforeAll
     public static void setUpClass() {
     }
-    
+
     @AfterAll
     public static void tearDownClass() {
     }
-    
+
     @BeforeEach
     public void setUp() {
     }
-    
+
     @AfterEach
     public void tearDown() {
     }
-    
+
     public logicTest() {
-        
-    
+    }
+
     // BLOC 1 — TESTS DE TAULER
-    
     @Test
-            
+
     void testInicialitzacioNoNula() {
         // Comprova que totes les caselles del tauler s’inicialitzen correctament
         // i que cap sigui null ni buida sense estat.
-        
+
         for (int fila = 0; fila < t.getFiles(); fila++) {
             for (int col = 0; col < t.getColumnes(); col++) {
                 casella c = t.getCasella(fila, col);
@@ -55,7 +54,7 @@ public class logicTest {
         }
     }
 
-     @Test
+    @Test
     void testDimensionsPerDefecte() {
         assertEquals(6, t.getFiles(), "El tauler per defecte hauria de tenir 6 files");
         assertEquals(7, t.getColumnes(), "El tauler per defecte hauria de tenir 7 columnes");
@@ -142,6 +141,40 @@ public class logicTest {
         assertEquals(6, files.length, "El tauler per defecte hauria de tenir 6 línies");
         assertTrue(files[0].contains("-"), "Cada fila hauria de contenir símbols '-' per caselles buides");
     }
+    
+    // BLOC 2 — TESTS DE CREATETREE
+    
+    void testGeneraHijosCorrectament() {
+        // Crea un Node amb un tauler buit
+        // Executa treeGeneration(node, 'X', 0, 1)
+        // Comprova que es generen x fills (un per cada columna possible).
     }
+    @Test
+    void testNoGeneraSiColumnaPlena() {
+        // Omple una columna i comprova que CreateTree
+        // no genera cap fill per aquella columna plena.
     }
 
+    @Test
+    void testAlternanciaJugadors() {
+        // Comprova que si el node pare és 'X',
+        // els fills generats són del jugador 'O'.
+    }
+
+    @Test
+    void testLimitDeProfunditat() {
+        // Crida treeGeneration amb maxProfunditat = 2
+        // i comprova que cap node s’ha generat amb profunditat > 2.
+    }
+
+    @Test
+    void testCopiaDeTaulerIndependent() {
+        // Comprova que els taulers dels fills són còpies independents:
+        // si modifiques un fill, el tauler del pare no canvia.
+    }
+
+    @Test
+    void testNumeroMaximDeFills() {
+        // Comprova que cap node té més de 7 fills.
+    }
+}
