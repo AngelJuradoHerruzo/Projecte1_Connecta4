@@ -9,7 +9,5 @@ package entities;
  * @author Usuario
  */
 public enum Casella {
-    BUIT,
-    JUGADOR,
-    MAQUINA;
+   
 }
