@@ -4,6 +4,7 @@
  */
 package game;
 
+import entities.Casella;
 import java.util.Scanner;
 
 /**
@@ -51,10 +52,11 @@ public class GameText {
         System.out.println("La CPU ha escollit la columna: "+game.getColumnaNovaFicha());
     }
     
-    public void pjWinnerText(){
-        System.out.println(pjName + " ha guanyat!");
+    public void mostrarGanador(Casella.Estat jugador, String pjName) {
+    switch (jugador) {
+        case JUGADOR_1 -> System.out.println(pjName + " ha guanyat!");
+        case JUGADOR_2 -> System.out.println("La màquina ha guanyat, per tant " + pjName + " ha perdut");
+        default -> System.out.println("Empat!");
     }
-    public void cpuWinnerText(){
-        System.out.println("La màquina ha guanyat, per tant " + pjName + " ha perdut");
-    }
+}
 }
