@@ -11,7 +11,7 @@ import entities.Tauler;
  * @author angel
  */
 public class CreateTree {
-   
+   /*
     public static void treeGeneration(Node node, char jugador, int profundidad, int maxProfundidad){
         
         if(profundidad >= maxProfundidad)return; //para detenerlo si llegamos al final de le arbol

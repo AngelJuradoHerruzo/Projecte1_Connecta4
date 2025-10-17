@@ -12,6 +12,8 @@ import java.util.List;
  * @author Achraf
  */
 public class Node {
+/*
+}
     private Tauler tauler;           // estat del tauler en aquest node
     private List<Node> hijos;        // llista de fills
 
@@ -38,4 +40,5 @@ public class Node {
     public void addhijo(Node hijo) {
         this.hijos.add(hijo);
     }
+    */
 }
