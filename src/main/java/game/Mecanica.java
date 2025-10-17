@@ -75,7 +75,7 @@ public class Mecanica {
         int columnes = tauler.getColumnes();
 
     // Buscar la fila de la última ficha colocada en la columna
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < files; i++) {
         if (tauler.getCasella(i, columnaNovaFicha).getEstat() == jugador) {
             fila = i;
             break;
@@ -156,7 +156,7 @@ public class Mecanica {
     // abajo-izquierda
     filaActual = fila + 1;
     colActual = columnaNovaFicha - 1;
-    while (filaActual < 6 && colActual >= 0 && tauler.getCasella(filaActual, colActual).getEstat() == jugador ) {
+    while (filaActual < files && colActual >= 0 && tauler.getCasella(filaActual, colActual).getEstat() == jugador ) {
         contador++;
         filaActual++;
         colActual--;
@@ -165,6 +165,9 @@ public class Mecanica {
     if (contador >= 4) return true;
 
     return false; // no hay ganador
+    }
+    public void repetirJugada(){
+        
     }
 
     
