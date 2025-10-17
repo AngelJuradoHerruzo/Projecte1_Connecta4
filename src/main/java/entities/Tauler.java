@@ -23,6 +23,20 @@ public class Tauler {
         return columnes;
     }
     
+// Constructor de copia
+public Tauler(Tauler otro) {
+    this.files = otro.files;
+    this.columnes = otro.columnes;
+    this.caselles= new Casella[files][columnes];
+    
+    for (int i = 0; i < files; i++) {
+        for (int j = 0; j < columnes; j++) {
+            // Crear una nueva casilla copiando el estado de la original
+            this.caselles[i][j] = new Casella(otro.caselles[i][j].getEstat());
+        }
+    }
+}
+    
     /**
      * Obté una casella específica del tauler.
      * Aquest mètode és útil per a la lògica de comprovació de victòries.
@@ -128,6 +142,12 @@ public class Tauler {
         return true; // Totes les columnes de la fila superior estan plenes
     }
     
+    
+// Comprueba si la columna está llena
+    public boolean isColumnFull(int columna) {
+    // La columna está llena si la casilla de la fila superior no está vacía
+        return !caselles[0][columna].estaBuida();
+    }
     
     /**************    .MÈTODES DE VISUALITZACIÓ.    **************
      * Mostra el tauler actual per la consola amb un format llegible.

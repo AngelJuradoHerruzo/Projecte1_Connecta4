@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package logic;
+import entities.Tauler;
 import java.util.ArrayList;
 import java.util.List;
 

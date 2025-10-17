@@ -12,11 +12,20 @@ public class Casella {
         JUGADOR_1("O"),
         JUGADOR_2("X");
         
+   
+    
+        
+        
+        
         private final String simbol;
         
         Estat(String simbol) {
             this.simbol = simbol;
         }
+        
+        
+        
+        
         
         public String getSimbol() {
             return simbol;
@@ -24,6 +33,11 @@ public class Casella {
     }
     
     private Estat estat;
+    
+    public Casella(Estat estat) {
+    this.estat = estat;
+}
+
     
     //CONSTRUCTOR
     public Casella() {
