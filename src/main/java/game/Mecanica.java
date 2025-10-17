@@ -14,8 +14,9 @@ import java.util.Scanner;
  */
 public class Mecanica {
     private Tauler tauler = new Tauler();
-    private int tornActual = 1;
+    private int tornActual = 0;
     private int columnaNovaFicha;
+    private Casella.Estat jugadorActual = Casella.Estat.JUGADOR_1;
     
 
     public void incrementarTorn(){
@@ -166,10 +167,20 @@ public class Mecanica {
 
     return false; // no hay ganador
     }
-    public void repetirJugada(){
+    public void alternarTurno(){
+        // Incrementar el turno
+    tornActual++;
+
+    // Cambiar el jugador actual según el turno
+    if (tornActual % 2 == 1) {
+        jugadorActual = Casella.Estat.JUGADOR_1;
+    } else {
+        jugadorActual = Casella.Estat.JUGADOR_2; // IA
+    }
+}
+    public void iniciarPartida(){
         
     }
-
-    
-}
+        
+    }
     
