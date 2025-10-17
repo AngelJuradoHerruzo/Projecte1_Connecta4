@@ -224,4 +224,22 @@ public class logicTest {
     }
 
     // BLOC 3 — TESTS FUTURS DE IA (ponderacions)
+    @Test
+    void testPonderacioTresEnRatlla() {
+        // Comprovar que una línia de 3 fitxes rep una ponderació alta.
+        
+    }
+
+    @Test
+    void testPonderacioUnaFitxa() {
+        // Comprovar que una sola fitxa té una ponderació baixa.
+    }
+
+    @Test
+    void testEmpatIA() {
+        // Comprovar que quan el tauler està ple,
+        // la IA assigna un valor de score d’empat.
+    }
+    
+    // BLOC 4 — TESTS DE EXECUCIO
     
