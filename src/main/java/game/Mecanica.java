@@ -4,6 +4,8 @@
  */
 package game;
 
+import entities.Casella;
+import entities.Tauler;
 import java.util.Scanner;
 
 /**
@@ -11,15 +13,11 @@ import java.util.Scanner;
  * @author angel
  */
 public class Mecanica {
-    private char[][] board = new char[6][7]; // 6 filas, 7 columnas mientras no tengo entities
+    private Tauler tauler = new Tauler();
     private int tornActual = 1;
     private int columnaNovaFicha;
     
-    public void tableroPlaceHolder(){
-        for(int i=0;i<6;i++)
-        for(int j=0;j<7;j++)
-            board[i][j] = '.';
-    }
+
     public void incrementarTorn(){
         tornActual++;
     }
@@ -32,7 +30,7 @@ public class Mecanica {
     return columnaNovaFicha;
 }
     
-    public void fichaJugada(Scanner scanner, GameText textos, char ficha){    
+    public void fichaJugada(Scanner scanner, GameText textos, Casella.Estat jugador){    
     int columna = -1;
     boolean colocada = false;
 
@@ -54,35 +52,36 @@ public class Mecanica {
         }
 
         // Validar si la columna está llena
-        if (board[5][columna] != '.') {
+        if (tauler.getCasella(0, columna).estaBuida() == false) {
             textos.columnaPlenaText(this);
             continue; // volver a pedir
         }
 
-        // Colocar ficha en la primera posición libre de abajo hacia arriba
-        for (int i = 0; i < 6; i++) {
-            if (board[i][columna] == '.') {
-                board[i][columna] = ficha;
+        
+            // intentar colocar la ficha
+            if (tauler.colocarFitxa(columna, jugador)) {
                 columnaNovaFicha = columna;
-                textos.columnaEscollidaPjText(this); // mostrar columna elegida
+                textos.columnaEscollidaPjText(this);
                 colocada = true;
-                break; // salir del bucle for
+            } else {
+                textos.columnaPlenaText(this);
             }
         }
-    }
     
     }
-    public boolean comprobarGanador(char ficha){        //se comprueba solo a partir de la ultima ficha, IMPORTANTE se comprueba siempre despues de añadir una ficha al tablero
+    public boolean comprobarGanador(Casella.Estat jugador){        //se comprueba solo a partir de la ultima ficha, IMPORTANTE se comprueba siempre despues de añadir una ficha al tablero
         int fila = -1;
+        int files = tauler.getFiles();
+        int columnes = tauler.getColumnes();
 
     // Buscar la fila de la última ficha colocada en la columna
     for (int i = 0; i < 6; i++) {
-        if (board[i][columnaNovaFicha] == ficha) {
+        if (tauler.getCasella(i, columnaNovaFicha).getEstat() == jugador) {
             fila = i;
             break;
         }
     }
-    if (fila == -1) return false; // no se encontró la ficha (por seguridad)
+    if (fila == -1) return false; // no se encontró la ficha (por seguridad) en teoria siempre se pude encontarr por el control de errrores del metodo colocar ficha
 
     int contador;
 
@@ -90,13 +89,13 @@ public class Mecanica {
     contador = 1;
      // contar fichas a la izquierda
             int colActual = columnaNovaFicha - 1;
-            while (colActual >= 0 && board[fila][colActual] == ficha) {
+            while (colActual >= 0 && tauler.getCasella(fila, colActual).getEstat() == jugador) {
                 contador++;
                 colActual--;
                 }
      // contar fichas a la derecha
             colActual = columnaNovaFicha + 1;
-            while (colActual < 7 && board[fila][colActual] == ficha) {
+            while (colActual < columnes && tauler.getCasella(fila, colActual).getEstat() == jugador) {
             contador++;
             colActual++;
             }
@@ -106,14 +105,14 @@ public class Mecanica {
         // contar fichas hacia arriba
          contador = 1;
          int filaActual = fila - 1;
-         while (filaActual >= 0 && board[filaActual][columnaNovaFicha] == ficha) {
+         while (filaActual >= 0 && tauler.getCasella(filaActual, columnaNovaFicha).getEstat() == jugador) {
              contador++;
              filaActual--;
              }
          
         // contar fichas hacia abajo
         filaActual = fila + 1;
-        while (filaActual < 6 && board[filaActual][columnaNovaFicha] == ficha) {
+        while (filaActual < files && tauler.getCasella(filaActual, columnaNovaFicha).getEstat() == jugador) {
             contador++;
             filaActual++;
             }
@@ -125,7 +124,7 @@ public class Mecanica {
         // arriba-izquierda
          filaActual = fila - 1;
         colActual = columnaNovaFicha - 1;
-        while (filaActual >= 0 && colActual >= 0 && board[filaActual][colActual] == ficha) {
+        while (filaActual >= 0 && colActual >= 0 && tauler.getCasella(filaActual, colActual).getEstat() == jugador) {
             contador++;
             filaActual--;
             colActual--;
@@ -133,7 +132,7 @@ public class Mecanica {
         // abajo-derecha
         filaActual = fila + 1;
         colActual = columnaNovaFicha + 1;
-        while (filaActual < 6 && colActual < 7 && board[filaActual][colActual] == ficha) {
+        while (filaActual < files && colActual < columnes && tauler.getCasella(filaActual, colActual).getEstat() == jugador) {
             contador++;
             filaActual++;
             colActual++;
@@ -148,7 +147,7 @@ public class Mecanica {
     // arriba-derecha
     filaActual = fila - 1;
     colActual = columnaNovaFicha + 1;
-    while (filaActual >= 0 && colActual < 7 && board[filaActual][colActual] == ficha) {
+    while (filaActual >= 0 && colActual < columnes && tauler.getCasella(filaActual, colActual).getEstat() == jugador) {
         contador++;
         filaActual--;
         colActual++;
@@ -157,7 +156,7 @@ public class Mecanica {
     // abajo-izquierda
     filaActual = fila + 1;
     colActual = columnaNovaFicha - 1;
-    while (filaActual < 6 && colActual >= 0 && board[filaActual][colActual] == ficha) {
+    while (filaActual < 6 && colActual >= 0 && tauler.getCasella(filaActual, colActual).getEstat() == jugador ) {
         contador++;
         filaActual++;
         colActual--;
@@ -166,7 +165,8 @@ public class Mecanica {
     if (contador >= 4) return true;
 
     return false; // no hay ganador
-}
+    }
+
     
 }
     
