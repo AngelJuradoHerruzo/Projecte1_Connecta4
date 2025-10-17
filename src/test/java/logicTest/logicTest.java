@@ -222,3 +222,6 @@ public class logicTest {
             assertTrue(f.getFills().size() <= 7, "Cap node fill hauria de tenir més de 7 fills");
         }
     }
+
+    // BLOC 3 — TESTS FUTURS DE IA (ponderacions)
+    
