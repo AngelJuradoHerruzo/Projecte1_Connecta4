@@ -242,4 +242,18 @@ public class logicTest {
     }
     
     // BLOC 4 — TESTS DE EXECUCIO
-    
+    void testIncrementarTorn() {
+        // Crea una instància d’Execucio
+        Execucio exec = new Execucio();
+
+        // Guarda el torn inicial
+        int tornInicial = exec.getTorn();
+
+        // Crida incrementarTorn()
+        exec.incrementarTorn();
+
+        // Comprova que el torn augmenta en +1
+        assertEquals(tornInicial + 1, exec.getTorn(), "El torn hauria d'augmentar en +1 després de cridar incrementarTorn().");
+    }
+     
+}
