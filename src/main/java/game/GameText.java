@@ -55,7 +55,9 @@ public class GameText {
     public void columnaInvalidaText(int columna) {
         System.out.println("⚠️  La columna " + columna + " no és vàlida. Escriu un nombre entre 0 i 6.");
     }
-
+    public void columnaInvalida2Text(){
+        System.out.println("⚠️  La columna no és vàlida. Escriu un nombre entre 0 i 6.");
+    }
     public void columnaEscollidaPjText(int columna) {
         System.out.println(pjName + " ha escollit la columna: " + columna);
     }
