@@ -39,20 +39,20 @@ public class Mecanica {
         try {                                   //si no es un int muestra mensaje y repite la peticion
             columna = scanner.nextInt();
         } catch (Exception e) {
-            textos.columnaInvalidaText(this);
+            textos.columnaInvalidaText(columna);
             scanner.nextLine(); // limpiar entrada inválida
             continue; // volver a pedir
         }
 
         // Validar rango de columna
         if (columna < 0 || columna > 6) {
-            textos.columnaInvalidaText(this);
+            textos.columnaInvalidaText(columna);
             continue; // volver a pedir
         }
 
         // Validar si la columna está llena
         if (tauler.getCasella(0, columna).estaBuida() == false) {
-            textos.columnaPlenaText(this);
+            textos.columnaPlenaText(columna);
             continue; // volver a pedir
         }
 
@@ -60,10 +60,10 @@ public class Mecanica {
             // intentar colocar la ficha
             if (tauler.colocarFitxa(columna, jugador)) {
                 columnaNovaFicha = columna;
-                textos.columnaEscollidaPjText(this);
+                textos.columnaEscollidaPjText(columna);
                 colocada = true;
             } else {
-                textos.columnaPlenaText(this);
+                textos.columnaPlenaText(columna);
             }
         }
     
