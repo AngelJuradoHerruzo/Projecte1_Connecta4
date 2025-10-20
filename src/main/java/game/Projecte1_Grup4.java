@@ -12,13 +12,16 @@ import java.util.Scanner;
  */
 public class Projecte1_Grup4 {
 
-    public static void main(String[] args) {
-         Scanner scanner = new Scanner(System.in); // solo un scanner
-                GameText jocText = new GameText();       // para usar metodos de otras clases
-                Mecanica jocMecanica = new Mecanica();  // para usar metodos de otras clases
+    public static void main(String[] args) {  
+        // Crear objetos necesarios
+        Scanner scanner = new Scanner(System.in);
+        Mecanica game = new Mecanica();
+        GameText textos = new GameText();
 
-        jocText.infoInici();                          // mostramos instrucciones
-        jocText.demanarNom(scanner);                   // pedimos el nombre usando el mismo scanner
+        // Iniciar la partida
+        game.iniciarPartida(scanner, textos);
 
+        // Cerrar el scanner al final
+        scanner.close();
     }
 }
