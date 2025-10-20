@@ -6,6 +6,7 @@ package game;
 
 import entities.Casella;
 import entities.Tauler;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -192,12 +193,28 @@ public Mecanica(Tauler taulerExistente) {
              while (!tauler.estaPle()) {
         // Cambiar turno al jugador que toca y muestra el tablero disponible
         alternarTurno();
+        textos.mostrarTorn(this);
         tauler.mostrarTauler();
-
-        // Turno del usuario
-        fichaJugada(scanner, jugadorActual); // pide la columna y actualiza columnaNovaFicha
-        colocarUltimaFicha(jugadorActual);   // coloca la ficha en el tablero
-
+            if (jugadorActual == Casella.Estat.JUGADOR_1) {
+                // --- TURNO DEL USUARIO ---
+                textos.mostrarTornPj();
+                textos.afegirFichaText();
+                fichaJugada(scanner, jugadorActual); // pide la columna y actualiza columnaNovaFicha (para separar metodos de peticion y añadir ficha
+                colocarUltimaFicha(jugadorActual);   // coloca la ficha en el tablero
+                textos.columnaEscollidaPjText(columnaNovaFicha);
+                } else {
+                    //  TURNO DE LA IA 
+                    textos.mostrarTornIA();
+                // Aquí llamaremos a tu método de IA cuando esté listo
+                // Ejemplo: columnaNovaFicha = ia.calcularMejorJugada(tauler); // Por ahora, ejemplo con columna random:
+            columnaNovaFicha = new Random().nextInt(tauler.getColumnes());
+            while (tauler.isColumnFull(columnaNovaFicha)) {
+                columnaNovaFicha = new Random().nextInt(tauler.getColumnes());
+            }
+            textos.columnaEscollidaIAText(columnaNovaFicha);
+            colocarUltimaFicha(jugadorActual);
+            
+            }
         // Comprobar si hay ganador
         if (comprobarGanador(jugadorActual)) {
             tauler.mostrarTauler();
