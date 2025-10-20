@@ -161,7 +161,7 @@ public Tauler(Tauler otro) {
         //IMPRIMIR CAPÇALERA DE COLUMNES
         System.out.print("       |");
         for (int j = 0; j < columnes; j++) {
-            System.out.print(" Col " + (j + 1) + " |");
+            System.out.print(" Col " + j + " |");
         }
         System.out.println();
 
@@ -176,7 +176,7 @@ public Tauler(Tauler otro) {
         
         //IMPRIMIR CADA FILA DEL TAULER
         for (int i = 0; i < files; i++) {
-            System.out.print("Fila " + (files - i) + " |"); // Nom de la fila
+            System.out.print("Fila " + i + " |"); // Nom de la fila
 
             for (int j = 0; j < columnes; j++) { // Contingut de cada casella de la fila
                 String simbol = caselles[i][j].getSimbol();
