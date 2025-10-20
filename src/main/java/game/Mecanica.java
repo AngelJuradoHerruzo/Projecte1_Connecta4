@@ -13,13 +13,16 @@ import java.util.Scanner;
  * @author angel
  */
 public class Mecanica {
-    private Tauler tauler = new Tauler();
+    private Tauler tauler;
+     
     private int tornActual = 0;
     private int columnaNovaFicha;
     private Casella.Estat jugadorActual = Casella.Estat.JUGADOR_1;
     
 
-
+public Mecanica(Tauler taulerExistente) {
+    this.tauler = taulerExistente;
+}
     public int getTornActual() {
     return tornActual;
 }
@@ -29,44 +32,48 @@ public class Mecanica {
     return columnaNovaFicha;
 }
     
-    public void fichaJugada(Scanner scanner, GameText textos, Casella.Estat jugador){    
-    int columna = -1;
-    boolean colocada = false;
+        // 1️⃣ Método para pedir y validar columna
+    public void fichaJugada(Scanner scanner, Casella.Estat jugador) {
+        int columna;
+        boolean colocada = false;
 
-    while (!colocada) {
-        textos.afegirFichaText(); // mensaje para pedir la columna
+        while (!colocada) {
+            System.out.println("Introduce la columna donde quieres colocar la ficha (0-6):");
 
-        try {                                   //si no es un int muestra mensaje y repite la peticion
-            columna = scanner.nextInt();
-        } catch (Exception e) {
-            textos.columnaInvalidaText(this);
-            scanner.nextLine(); // limpiar entrada inválida
-            continue; // volver a pedir
-        }
-
-        // Validar rango de columna
-        if (columna < 0 || columna > 6) {
-            textos.columnaInvalidaText(this);
-            continue; // volver a pedir
-        }
-
-        // Validar si la columna está llena
-        if (tauler.getCasella(0, columna).estaBuida() == false) {
-            textos.columnaPlenaText(this);
-            continue; // volver a pedir
-        }
-
-        
-            // intentar colocar la ficha
-            if (tauler.colocarFitxa(columna, jugador)) {
-                columnaNovaFicha = columna;
-                textos.columnaEscollidaPjText(this);
-                colocada = true;
-            } else {
-                textos.columnaPlenaText(this);
+            try {
+                columna = scanner.nextInt();
+            } catch (Exception e) {
+                System.out.println("Entrada inválida. Introduce un número entre 0 y 6.");
+                scanner.nextLine(); // limpiar entrada inválida
+                continue;
             }
+
+            // Validar rango de columna
+            if (columna < 0 || columna > 6) {
+                System.out.println("Columna inválida: " + columna);
+                continue;
+            }
+
+            // Validar si la columna está llena
+            if (!tauler.getCasella(0, columna).estaBuida()) {
+                System.out.println("Columna " + columna + " está llena.");
+                continue;
+            }
+
+            // Si pasa todas las validaciones, guardamos la columna y salimos
+            columnaNovaFicha = columna;
+            colocada = true;
         }
-    
+    }
+
+    // 2️⃣ Método para colocar la ficha en el tablero usando columnaNovaFicha
+    public boolean colocarUltimaFicha(Casella.Estat jugador) {
+        if (columnaNovaFicha < 0 || columnaNovaFicha > tauler.getColumnes() - 1) {
+        return false; // seguridad, nunca debería pasar
+        }
+
+        boolean colocada = tauler.colocarFitxa(columnaNovaFicha, jugador);
+        return colocada; // devuelve true si la ficha se colocó correctamente
     }
     
     public boolean comprobarGanador(Casella.Estat jugador){        //se comprueba solo a partir de la ultima ficha, IMPORTANTE se comprueba siempre despues de añadir una ficha al tablero
@@ -188,20 +195,21 @@ public class Mecanica {
         tauler.mostrarTauler();
 
         // Turno del usuario
-        fichaJugada(scanner, textos, jugadorActual);
+        fichaJugada(scanner, jugadorActual); // pide la columna y actualiza columnaNovaFicha
+        colocarUltimaFicha(jugadorActual);   // coloca la ficha en el tablero
 
         // Comprobar si hay ganador
         if (comprobarGanador(jugadorActual)) {
             tauler.mostrarTauler();
             textos.mostrarGanador(jugadorActual); // mensaje de usuario ganador
-            break; // terminar la partida
+            return; // terminar la partida
         }
 
         // Comprobar empate
         if (tauler.estaPle()) {
             tauler.mostrarTauler();
             textos.mostrarGanador(Casella.Estat.BUIDA); // usa BUIDA para empate ya que en el switch esta en default
-            break; //termina partida
+            return; //termina partida
         }
     }
     }
