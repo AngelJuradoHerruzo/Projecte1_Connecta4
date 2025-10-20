@@ -30,7 +30,7 @@ public class CreateTree {
                 // si la jugada esta bien  añadimos el nodo hijo y seguimos generando
                 if (jugadaExitosa) {
                     Node hijo = new Node(copy);
-                    node.addhijo(hijo);
+                    node.addHijo(hijo);
 
                     // Alternamos jugador
                     char siguientejugador = (jugador == 'X') ? 'O' : 'X';

@@ -37,7 +37,7 @@ public class Node {
     }
 
     // Afegir un fill
-    public void addhijo(Node hijo) {
+    public void addHijo(Node hijo) {
         this.hijos.add(hijo);
     }
     

@@ -14,6 +14,9 @@ public class Execucio {
     private int tornActual = 1;
     private String pjName;
     
+    public int getTorn() {
+        return tornActual;
+    }
     public static void infoInici() {
         System.out.println("""
                            L\u2019objectiu del joc \u00e9s connectar quatre fitxes seguides en l\u00ednia horitzontal, vertical o diagonal abans que el rival.
