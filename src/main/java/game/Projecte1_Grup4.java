@@ -4,6 +4,7 @@
 
 package game;
 
+import entities.Tauler;
 import java.util.Scanner;
 
 /**
@@ -15,7 +16,8 @@ public class Projecte1_Grup4 {
     public static void main(String[] args) {  
         // Crear objetos necesarios
         Scanner scanner = new Scanner(System.in);
-        Mecanica game = new Mecanica();
+        Tauler tauler = new Tauler(); 
+        Mecanica game = new Mecanica(tauler);
         GameText textos = new GameText();
 
         // Iniciar la partida
