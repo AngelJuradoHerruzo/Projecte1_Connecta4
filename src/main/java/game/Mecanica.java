@@ -13,13 +13,16 @@ import java.util.Scanner;
  * @author angel
  */
 public class Mecanica {
-    private Tauler tauler = new Tauler();
+    private Tauler tauler;
+     
     private int tornActual = 0;
     private int columnaNovaFicha;
     private Casella.Estat jugadorActual = Casella.Estat.JUGADOR_1;
     
 
-
+public Mecanica(Tauler taulerExistente) {
+    this.tauler = taulerExistente;
+}
     public int getTornActual() {
     return tornActual;
 }
