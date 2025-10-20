@@ -154,6 +154,35 @@ public Tauler(Tauler otro) {
      * Utilitza els símbols de cada casella per representar l'estat del joc.
      */
     
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < files; i++) {
+            for (int j = 0; j < columnes; j++) {
+                sb.append(caselles[i][j].getSimbol());
+                if (j < columnes - 1) sb.append(" "); // espacio entre casillas
+            }
+            sb.append("\n"); // salto de línea al final de cada fila
+        }
+
+        return sb.toString();
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public void mostrarTauler() {
         System.out.println("-------------------------- TAULER ACTUAL --------------------------\n");
 
@@ -191,6 +220,7 @@ public Tauler(Tauler otro) {
             System.out.println();
         }
         System.out.println();
+        
     }
 }
 
