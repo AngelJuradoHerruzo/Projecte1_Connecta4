@@ -34,7 +34,7 @@ public Mecanica(Tauler taulerExistente) {
     
         // 1️⃣ Método para pedir y validar columna
     public void fichaJugada(Scanner scanner, Casella.Estat jugador) {
-        int columna = -1;
+        int columna;
         boolean colocada = false;
 
         while (!colocada) {
