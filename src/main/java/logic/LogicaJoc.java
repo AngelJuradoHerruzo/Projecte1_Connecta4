@@ -35,6 +35,35 @@ public class LogicaJoc {
         System.out.println("Columna completa. Elige otra columna.");
         return false;
     }
+    
+    public static void imprimirTauler(Tauler tauler) {
+        for (int fila = 0; fila < tauler.getFiles(); fila++) {
+            for (int columna = 0; columna < tauler.getColumnes(); columna++) {
+                Casella.Estat estat = tauler.getCasella(fila, columna).getEstat();
+
+                if (estat == Casella.Estat.BUIDA) {
+                    System.out.print("|   ");
+                } else if (estat == Casella.Estat.JUGADOR_1) {
+                    System.out.print("| X ");
+                } else if (estat == Casella.Estat.JUGADOR_2) {
+                    System.out.print("| O ");
+                }
+            }
+            System.out.println("|");
+        }
+        System.out.println("-----------------------------");
+    }
+    
+    /*
+       // Insertamos tres fichas de prueba
+    tauler.insertaFitxa(tauler, 3, jugador);
+    tauler.insertaFitxa(tauler, 3, jugador);
+    tauler.insertaFitxa(tauler, 2, Casella.Estat.JUGADOR_2);
+
+    // Mostramos el resultado
+    tauler.imprimirTauler();
+}
+    */
 
     /**
      * Còpia profunda del tauler per garantir que els canvis no afectin l’original.
