@@ -16,6 +16,7 @@ public class Node {
 
     private Tauler tauler;           // estat del tauler en aquest node
     private List<Node> hijos;        // llista de fills
+    private int valor;
 
     // Constructor
     public Node(Tauler tauler) {
@@ -39,6 +40,13 @@ public class Node {
     // Afegir un fill
     public void addHijo(Node hijo) {
         this.hijos.add(hijo);
+    }
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
     }
     
 }

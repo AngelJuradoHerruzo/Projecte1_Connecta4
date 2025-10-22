@@ -196,7 +196,7 @@ public Mecanica(Tauler taulerExistente) {
         textos.mostrarTorn(this);
         tauler.mostrarTauler();
             if (jugadorActual == Casella.Estat.JUGADOR_1) {
-                // --- TURNO DEL USUARIO ---
+                // TURNO DEL USUARIO
                 textos.mostrarTornPj();
                 textos.afegirFichaText();
                 fichaJugada(scanner, jugadorActual); // pide la columna y actualiza columnaNovaFicha (para separar metodos de peticion y añadir ficha
