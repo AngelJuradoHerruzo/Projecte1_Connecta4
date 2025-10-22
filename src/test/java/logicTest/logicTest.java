@@ -52,8 +52,9 @@ public class logicTest {
     @Test
 
     void testInicialitzacioNoNula() {
-        // Comprova que totes les caselles del tauler s’inicialitzen correctament
-        // i que cap sigui null ni buida sense estat.
+        /**
+     * Verifica que totes les caselles s'inicialitzen correctament.
+     */
 
         for (int fila = 0; fila < t.getFiles(); fila++) {
             for (int col = 0; col < t.getColumnes(); col++) {
@@ -63,13 +64,17 @@ public class logicTest {
             }
         }
     }
-
+    /**
+     * Comprova les dimensions per defecte del tauler.
+     */
     @Test
     void testDimensionsPerDefecte() {
         assertEquals(6, t.getFiles(), "El tauler per defecte hauria de tenir 6 files");
         assertEquals(7, t.getColumnes(), "El tauler per defecte hauria de tenir 7 columnes");
     }
-
+    /**
+     * Verifica la creació de taulers amb dimensions personalitzades.
+     */
     @Test
     void testDimensionsPersonalitzades() {
         Tauler t2 = new Tauler(4, 4);
@@ -77,7 +82,9 @@ public class logicTest {
         assertEquals(4, t2.getColumnes(), "El tauler personalitzat hauria de tenir 4 columnes");
         assertNotNull(t2.getCasella(0, 0), "Una casella dins dels límits no pot ser null");
     }
-
+    /**
+     * Test per col·locar fitxa en columna vàlida.
+     */
     @Test
     void testColocarFitxaColumnaValida() {
         boolean resultat = t.colocarFitxa(3,  Casella.Estat.HUMA);
@@ -87,7 +94,9 @@ public class logicTest {
         Casella c = t.getCasella(filaInferior, 3);
         assertEquals(Casella.Estat.HUMA, c.getEstat(), "La fitxa s'hauria de col·locar a la fila inferior");
     }
-
+    /**
+     * Verifica que no es pugui col·locar fitxa en columna plena.
+     */
     @Test
     void testColocarFitxaColumnaPlena() {
         int col = 2;
@@ -96,13 +105,17 @@ public class logicTest {
         }
         assertFalse(t.colocarFitxa(col, Casella.Estat.IA), "No hauria de permetre afegir més fitxes a una columna plena");
     }
-
+    /**
+     * Test per columnes invàlides (fora de rang).
+     */
     @Test
     void testColocarFitxaColumnaInvalida() {
         assertFalse(t.colocarFitxa(-1, Casella.Estat.HUMA), "Columna negativa no vàlida");
         assertFalse(t.colocarFitxa(10, Casella.Estat.HUMA), "Columna fora de rang no vàlida");
     }
-
+    /**
+     * Verifica jugades d'usuari i IA.
+     */
     @Test
     void testJugadaUsuariIA() {
         assertTrue(t.colocarFitxa(0, Casella.Estat.HUMA));
@@ -114,7 +127,9 @@ public class logicTest {
         assertEquals(Casella.Estat.HUMA, c1.getEstat(), "Casella de jugador hauria de tenir 'JUGADOR'");
         assertEquals(Casella.Estat.IA, c2.getEstat(), "Casella de màquina hauria de tenir 'MAQUINA'");
     }
-
+    /**
+     * Comprova la detecció de tauler ple.
+     */
     @Test
     void testTaulerPle() {
         for (int c = 0; c < t.getColumnes(); c++) {
@@ -128,19 +143,25 @@ public class logicTest {
         t.getCasella(0, 0).setEstat(Estat.BUIDA);
         assertFalse(t.estaPle(), "El tauler no hauria d'estar ple si hi ha una casella buida");
     }
-
+    /**
+     * Test per obtenir casella vàlida.
+     */
     @Test
     void testGetCasellaValida() {
         Casella c = t.getCasella(0, 0);
         assertNotNull(c, "Una casella dins dels límits no pot ser null");
     }
-
+    /**
+     * Test per obtenir casella invàlida.
+     */
     @Test
     void testGetCasellaInvalida() {
         assertNull(t.getCasella(10, 3), "Fora dels límits hauria de retornar null");
         assertNull(t.getCasella(-1, 2), "Fora dels límits (negatiu) hauria de retornar null");
     }
-
+    /**
+     * Verifica la representació textual del tauler.
+     */
     @Test
     void testObtenirRepresentacioTextual() {
         String representacio = t.toString();
@@ -153,6 +174,11 @@ public class logicTest {
     }
     
     // BLOC 2 — TESTS DE CREATETREE
+    
+    /**
+     * Verifica la generació correcta de nodes fills.
+     */
+    
     @Test
     void testGeneraFillsCorrectament() {
         // Crea un Node amb un tauler buit
@@ -181,6 +207,11 @@ public class logicTest {
         assertFalse(columnaPlenaGeneraFill, "No s'ha de generar node fill per columna plena");
     }
 */
+    
+    /**
+     * Comprova l'alternança de jugadors en la generació de l'arbre.
+     */
+    
     @Test
     void testAlternanciaJugadors() {
         // Comprova que si el node pare és 'X',
@@ -194,7 +225,10 @@ public class logicTest {
             assertEquals("O", jugadorSeguent, "El jugador del fill hauria de ser 'O'");
         }
     }
-
+    /**
+     * Verifica el límit de profunditat en la generació de l'arbre.
+     */
+    
     @Test
     void testLimitDeProfunditat() {
         // Crida treeGeneration amb maxProfunditat = 2
@@ -211,7 +245,11 @@ public class logicTest {
         }
         assertFalse(profunditatMajor2, "No s'ha de generar cap node amb profunditat > 2");
     }
-
+    
+    /**
+     * Comprova la independència de les còpies del tauler.
+     */
+    
     @Test
     void testCopiaDeTaulerIndependent() {
         // Comprova que els taulers dels fills són còpies independents:
@@ -225,6 +263,10 @@ public class logicTest {
                 "El tauler del pare no hauria de canviar si modifiquem un fill");
     }
 
+    /**
+     * Verifica el nombre màxim de fills per node.
+     */
+
     @Test
     void testNumeroMaximDeFills() {
         // Comprova que cap node té més de 6 fills.
@@ -236,6 +278,11 @@ public class logicTest {
     }
 
     // BLOC 3 — TESTS FUTURS DE IA (ponderacions)
+    
+    /**
+     * Test per ponderació de tres en ratlla.
+     */
+    
     @Test
     void testPonderacioTresEnRatlla() {
         // Comprovar que una línia de 3 fitxes rep una ponderació alta.
@@ -247,13 +294,21 @@ public class logicTest {
         // Comprovar que una sola fitxa té una ponderació baixa.
     }
 
+     /**
+     * Test per situació d'empat.
+     */
+    
     @Test
     void testEmpatIA() {
-        // Comprovar que quan el tauler està ple,
-        // la IA assigna un valor de score d’empat.
+        
     }
     
     // BLOC 4 — TESTS DE EXECUCIO
+    
+    /**
+     * Verifica l'increment correcte del torn.
+     */
+    
     @Test
     void testIncrementarTorn() {
         // Crea una instància d’Execucio
