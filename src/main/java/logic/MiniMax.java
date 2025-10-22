@@ -22,82 +22,58 @@ public class MiniMax {
      */
     public Node minimax(Node node, int depth, boolean maximizingPlayer, Casella.Estat jugadorIA) {
 
-        // Cas base: si hem arribat al final de la profunditat o no hi ha més fills
+        // Caso base: si llegamos al final de la profundidad o no hay hijos
         if (depth == 0 || node.getHijos().isEmpty()) {
             int valor = Score.score(node.getTauler(), jugadorIA); // heurística
             node.setValor(valor);
             return node;
         }
 
-        // Si és el torn de la IA -> maximitza el valor
+        // Turno de la IA → maximizamos
         if (maximizingPlayer) {
-            int millorValor = Integer.MIN_VALUE;
-            Node millorNode = null;
+            int mejorValor = Integer.MIN_VALUE;
+            Node mejorNode = null;
 
-            for (Node fill : node.getHijos()) {
-                Node resultat = minimax(fill, depth - 1, false, jugadorIA);
+            for (Node hijo : node.getHijos()) {
+                Node resultado = minimax(hijo, depth - 1, false, jugadorIA);
 
-                if (resultat.getValor() > millorValor) {
-                    millorValor = resultat.getValor();
-                    millorNode = resultat;
+                if (resultado.getValor() > mejorValor) {
+                    mejorValor = resultado.getValor();
+                    mejorNode = resultado; // usamos resultado para propagar valor y columna
                 }
             }
 
-            node.setValor(millorValor);
-            return millorNode;
+            node.setValor(mejorValor);
 
-        // Si és el torn del jugador -> minimitza el valor
+            // Propagamos la columna de la mejor jugada
+            if (mejorNode != null) {
+                node.setColumnaSeleccionada(mejorNode.getColumnaSeleccionada());
+            }
+
+            return mejorNode;
+
+        // Turno del humano → minimizamos
         } else {
-            int pitjorValor = Integer.MAX_VALUE;
-            Node pitjorNode = null;
+            int peorValor = Integer.MAX_VALUE;
+            Node peorNode = null;
 
-            for (Node fill : node.getHijos()) {
-                Node resultat = minimax(fill, depth - 1, true, jugadorIA);
+            for (Node hijo : node.getHijos()) {
+                Node resultado = minimax(hijo, depth - 1, true, jugadorIA);
 
-                if (resultat.getValor() < pitjorValor) {
-                    pitjorValor = resultat.getValor();
-                    pitjorNode = resultat;
+                if (resultado.getValor() < peorValor) {
+                    peorValor = resultado.getValor();
+                    peorNode = resultado;
                 }
             }
 
-            node.setValor(pitjorValor);
-            return pitjorNode;
-        }
-    }
-    
-    /*
-    public Node minimaxPrueba(Node node, int depth, boolean maximizingPlayer) {
-    // Caso base: si llegamos a la profundidad 0 o no hay hijos
-    if (depth == 0 || node.getHijos().isEmpty()) {
-        // Ya tenemos el valor en node.getValor(), no hace falta score
-        return node;
-    }
+            node.setValor(peorValor);
 
-    if (maximizingPlayer) { // Turno de la IA -> maximizamos
-        int mejorValor = Integer.MIN_VALUE;
-        Node mejorNode = null;
-        for (Node hijo : node.getHijos()) {
-            Node resultado = minimaxPrueba(hijo, depth - 1, false);
-            if (resultado.getValor() > mejorValor) {
-                mejorValor = resultado.getValor();
-                mejorNode = resultado; // IMPORTANTE: usar resultado, no hijo
+            // Propagamos la columna de la peor jugada
+            if (peorNode != null) {
+                node.setColumnaSeleccionada(peorNode.getColumnaSeleccionada());
             }
+
+            return peorNode;
         }
-        node.setValor(mejorValor);
-        return mejorNode;
-    } else { // Turno del humano -> minimizamos
-        int peorValor = Integer.MAX_VALUE;
-        Node peorNode = null;
-        for (Node hijo : node.getHijos()) {
-            Node resultado = minimaxPrueba(hijo, depth - 1, true);
-            if (resultado.getValor() < peorValor) {
-                peorValor = resultado.getValor();
-                peorNode = resultado; // usar resultado
-            }
-        }
-        node.setValor(peorValor);
-        return peorNode;
     }
-}
-    */
 }
