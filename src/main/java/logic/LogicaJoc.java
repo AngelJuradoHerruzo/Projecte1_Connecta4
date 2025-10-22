@@ -43,7 +43,7 @@ public class LogicaJoc {
 
                 if (estat == Casella.Estat.BUIDA) {
                     System.out.print("|   ");
-                } else if (estat == Casella.Estat.JUGADOR_1) {
+                } else if (estat == Casella.Estat.HU {
                     System.out.print("| X ");
                 } else if (estat == Casella.Estat.JUGADOR_2) {
                     System.out.print("| O ");
