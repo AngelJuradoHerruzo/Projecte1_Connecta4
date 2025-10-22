@@ -8,6 +8,9 @@ import entities.Casella;
 import entities.Tauler;
 import java.util.Random;
 import java.util.Scanner;
+import logic.LogicaJoc;
+import logic.MiniMax;
+import logic.Node;
 
 /**
  *
@@ -15,7 +18,8 @@ import java.util.Scanner;
  */
 public class Mecanica {
     private Tauler tauler;
-     
+    LogicaJoc logica = new LogicaJoc();
+    
     private int tornActual = 0;
     private int columnaNovaFicha;
     private Casella.Estat jugadorActual = Casella.Estat.JUGADOR_1;
@@ -184,7 +188,7 @@ public Mecanica(Tauler taulerExistente) {
     } else {
         jugadorActual = Casella.Estat.JUGADOR_2; // IA
     }
-}
+}   
     public void iniciarPartida(Scanner scanner , GameText textos){
          // Mostrar información inicial y pedir nombre
         textos.infoInici();
@@ -205,16 +209,12 @@ public Mecanica(Tauler taulerExistente) {
                 } else {
                     //  TURNO DE LA IA 
                     textos.mostrarTornIA();
-                // Aquí llamaremos a tu método de IA cuando esté listo
-                // Ejemplo: columnaNovaFicha = ia.calcularMejorJugada(tauler); // Por ahora, ejemplo con columna random:
-            columnaNovaFicha = new Random().nextInt(tauler.getColumnes());
-            while (tauler.isColumnFull(columnaNovaFicha)) {
-                columnaNovaFicha = new Random().nextInt(tauler.getColumnes());
-            }
-            textos.columnaEscollidaIAText(columnaNovaFicha);
-            colocarUltimaFicha(jugadorActual);
-            
-            }
+                // Llamamos al método auxiliar
+                    columnaNovaFicha = logica.calcularMejorColumnaIA(tauler, 6); // profundidad 6
+    
+                    colocarUltimaFicha(jugadorActual);
+                    textos.columnaEscollidaIAText(columnaNovaFicha);
+                }
         // Comprobar si hay ganador
         if (comprobarGanador(jugadorActual)) {
             tauler.mostrarTauler();
