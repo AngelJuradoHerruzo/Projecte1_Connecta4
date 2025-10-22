@@ -140,7 +140,7 @@ public class ScoreTest {
         score.setFitxes2IA(1);
         score.setFitxes3IA(1);
         score.setFitxes4IA(0);
-        int esperat = ((1 * 2 + 2 * 3 + 1 * 100000) - (1 * 2 + 1 * 3));
+        int esperat = (1*2 + 1*3) - (1*2 + 2*3 + 1*100000); // ScoreIA - ScoreHUMA
         int resultat = score.getScore(Casella.Estat.IA);
         assertEquals(esperat, resultat, "El càlcul del score IA hauria de ser correcte");
     }
