@@ -22,14 +22,14 @@ public class MiniMax {
      */
     public Node minimax(Node node, int depth, boolean maximizingPlayer, Casella.Estat jugadorIA) {
 
-        // 🔹 1. Cas base: si hem arribat al final de la profunditat o no hi ha més fills
+        // Cas base: si hem arribat al final de la profunditat o no hi ha més fills
         if (depth == 0 || node.getHijos().isEmpty()) {
             int valor = Score.score(node.getTauler(), jugadorIA); // heurística
             node.setValor(valor);
             return node;
         }
 
-        // 🔹 2. Si és el torn de la IA -> maximitza el valor
+        // Si és el torn de la IA -> maximitza el valor
         if (maximizingPlayer) {
             int millorValor = Integer.MIN_VALUE;
             Node millorNode = null;
@@ -46,7 +46,7 @@ public class MiniMax {
             node.setValor(millorValor);
             return millorNode;
 
-        // 🔹 3. Si és el torn del jugador -> minimitza el valor
+        // Si és el torn del jugador -> minimitza el valor
         } else {
             int pitjorValor = Integer.MAX_VALUE;
             Node pitjorNode = null;
