@@ -77,4 +77,16 @@ public class LogicaJoc {
         }
         return copia;
     }
+    public int calcularMejorColumnaIA(Tauler taulerActual, int profundidad) {
+       MiniMax miniMax = new MiniMax();
+
+    // Usamos una copia del tablero para no modificar el original
+    Node raiz = new Node(clonarTauler(taulerActual));
+
+    // Llamamos a Minimax (maximizador = IA)
+    Node mejor = miniMax.minimax(raiz, profundidad, true, Casella.Estat.JUGADOR_2);
+
+    // Devolvemos la columna seleccionada
+    return mejor.getColumnaSeleccionada();
+}
 }
