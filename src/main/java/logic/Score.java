@@ -167,7 +167,7 @@ public class Score {
     } 
     
     
-    /**************    .´SCORE.    **************
+    /**************    .SCORE.    **************
      * Mètode que calcula un valor heurístic o score per a un jugador concret
      * en un tauler determinat.
      *
