@@ -17,7 +17,7 @@ public class Score {
     
     int ScoreHUMA = 0;
     int ScoreIA = 0;
-   
+    
     
     /**************    .GETTERS PER A PROVES.    **************/
     public int getFitxes2HUMA() { return Fitxes_2_HUMA; }
@@ -78,104 +78,67 @@ public class Score {
 
     public int comptarFitxes(Tauler tauler, int grup, Casella.Estat estat) {
         int comptador = 0;
-        
-        /**************    .HORITZONTAL.    **************/
-        for (int f = 5; f >= 0; f--) {  // Recórrer totes les files
-            int count = 0;              // Comptador temporal per la seqüència
 
-            for (int c = 0; c <= 6; c++) {                  // Recórrer totes les columnes
-                Casella casella = tauler.getCasella(f, c);  // Obtenim casella
+        /**************    .HORITZONTAL I VERTICAL.    **************/
+        for (boolean horitzontal : new boolean[] {true, false}) {  // Primer horitzontal, després vertical
+            for (int i = 0; i < (horitzontal ? 6 : 7); i++) {       // Files si Horitzontal, columnes si vertical
+                int count = 0;
 
-                if (casella.getEstat() == estat) { // Estat passat al mètode (HUMA o IA)
-                    count++;
-                } 
-                else { // Quan la seqüència es trenca
-                    if (count == grup) {
-                        comptador++; // Només comptem si és exactament del tamany desitjat
+                for (int j = 0; j < (horitzontal ? 7 : 6); j++) {   // Columnes si Horitzontal, files si vertical
+                    int f = horitzontal ? i : 5 - j;
+                    int c = horitzontal ? j : i;
+                    Casella casella = tauler.getCasella(f, c);  // Obtenim casella
+
+                    if (casella.getEstat() == estat) { // Estat passat al mètode (HUMA o IA)
+                        count++;
+                    } 
+                    else { // Quan la seqüència es trenca
+                        if (count == grup) {
+                            comptador++; // Només comptem si és exactament del tamany desitjat
+                        }
+                        count = 0;
                     }
-                    count = 0;
                 }
+
+                if (count == grup) comptador++; // Comprovem al final de la seqüència
             }
-            
-            if (count == grup) comptador++; // Comprovem al final de la seqüència
         }
         
-        
-        /**************    .VERTICAL.    **************/
-        for (int c = 0; c <= 6; c++) {  // Recórrer totes les columnes
-            int count = 0;              // Comptador temporal per la seqüència
+        /**************    .DIAGONAL PRINCIPAL I INVERSA.    **************/
+        for (int diagonal = 0; diagonal < 2; diagonal++) {
+            int df = (diagonal == 0) ? 1 : -1;  // Increment de fila: +1 per diagonal principal, -1 per inversa
 
-            for (int f = 5; f >= 0; f--) {                  // Recórrer totes les files
-                Casella casella = tauler.getCasella(f, c);  // Obtenim casella
+            for (int f = 0; f <= 5; f++) {       // Recorrem totes les files
+                for (int c = 0; c <= 6; c++) {   // Recorrem totes les columnes
+                    int count = 0;
 
-                if (casella.getEstat() == estat) { // Estat passat al mètode (HUMA o IA)
-                    count++;
-                } 
-                else { // Quan la seqüència es trenca
-                    if (count == grup) {
-                        comptador++; // Només comptem si és exactament del tamany desitjat
-                    }
-                    count = 0;
-                }
-            }
-            
-            if (count == grup) comptador++; // Comprovem al final de la seqüència
-        }
-        
-        
-        /**************    .DIAGONALS.    **************/
-        //DIAGONAL PRINCIPAL (DE DALT-ESQUERRA A BAIX-DRETA) \
-        for (int f = 0; f <= 5; f++) {          // Recorrem totes les files
-            for (int c = 0; c <= 6; c++) {      // Recorrem totes les columnes
-                int count = 0;                  // Comptador temporal per la seqüència
-
-                // Només començar si hi ha espai suficient cap a baix-dreta
-                if (f + grup - 1 < 6 && c + grup - 1 < 7) {
-                    
-                    // Recorrem les caselles de la diagonal sense sortir-nos de les files i columnes
-                    for (int i = 0; i < grup && f + i < 6 && c + i < 7; i++) {
-                        Casella casella = tauler.getCasella(f + i, c + i);
-
+                    //RECORREM CASELLES DE LA DIAGONAL SENSE SORTIR-NOS DEL TAULER
+                    for (int i = 0; i < grup; i++) {
+                        int fi = f + df * i;      // Fila segons el tipus de diagonal
+                        int ci = c + i;           // Columna incrementant cap a la dreta
+                        
+                        if (fi < 0 || fi >= 6 || ci < 0 || ci >= 7) {
+                            break; // Seqüència fora del tauler
+                        }
+                        Casella casella = tauler.getCasella(fi, ci);
+                        
                         if (casella.getEstat() == estat) {
-                            count++;    // Incrementem si la fitxa és del jugador que busquem
-                        } 
+                            count++; // Incrementem si la casella és del jugador buscat
+                        }
                         else {
-                            break;      // Seqüència trencada, sortim del bucle
+                            break;
                         }
                     }
-
-                    if (count == grup) comptador++;  // Comprovem al final de la seqüència
-                }
-            }
-        }
-
-        //DIAGONAL INVERSA (DE DALT-DRETA A BAIX-ESQUERRA) /
-        for (int f = 0; f <= 5; f++) {          // Recorrem totes les files
-            for (int c = 0; c <= 6; c++) {      // Recorrem totes les columnes
-                int count = 0;                  // Comptador temporal per la seqüència
-
-                // Només començar si hi ha espai suficient cap a baix-esquerra
-                if (f - grup + 1 >= 0 && c + grup - 1 < 7) {
                     
-                    // Recorrem les caselles de la diagonal sense sortir-nos de les files i columnes
-                    for (int i = 0; i < grup && f - i >= 0 && c + i < 7; i++) {
-                        Casella casella = tauler.getCasella(f - i, c + i);
-
-                        if (casella.getEstat() == estat)
-                            count++;           // Incrementem si la fitxa és del jugador que busquem
-                        else
-                            break;             // Seqüència trencada, sortim del bucle
-                    }
-
-                    if (count == grup) comptador++;  // Comprovem al final de la seqüència
+                    if (count == grup) comptador++; // Comprovem al final de la seqüència
                 }
             }
         }
         
         return comptador; // Retorna el nombre de grups trobats
-    }
-    
-    
+    }    
+        
+        
     /**************    .GET SCORE.    **************
      * Mètode que recorre totes les caselles buscant els grups de fitxes corresponents.
      *
