@@ -17,7 +17,7 @@ public class Node {
     private Tauler tauler;           // estat del tauler en aquest node
     private List<Node> hijos;        // llista de fills
     private int valor;
-
+    private int columnaSeleccionada;
     // Constructor
     public Node(Tauler tauler) {
         this.tauler = tauler;
@@ -48,5 +48,12 @@ public class Node {
     public void setValor(int valor) {
         this.valor = valor;
     }
+    
+    public int getColumnaSeleccionada (){
+        return columnaSeleccionada;
+    }
+     public void setColumnaSeleccionada(int columna) { 
+         this.columnaSeleccionada = columna; 
+     }
     
 }
