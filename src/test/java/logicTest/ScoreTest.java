@@ -112,7 +112,7 @@ public class ScoreTest {
         t.getCasella(fila, 0).setEstat(Casella.Estat.HUMA);
         t.getCasella(fila, 1).setEstat(Casella.Estat.HUMA);
         t.getCasella(fila, 2).setEstat(Casella.Estat.IA);
-        score.numFitxesJuntes(t, 0, null);
+        score.numFitxesJuntes(t);
         assertTrue(score.getFitxes2HUMA() >= 0);
         assertTrue(score.getFitxes2IA() >= 0);
     }
@@ -153,11 +153,11 @@ public class ScoreTest {
 
     @Test
     public void testScoreEquilibratEntreJugadors() {
-        score.setFitxes2HUMA(2);
-        score.setFitxes3HUMA(2);
-        score.setFitxes4HUMA(1);
+        score.setFitxes2HUMA(1);
+        score.setFitxes3HUMA(1);
+        score.setFitxes4HUMA(0);
         score.setFitxes2IA(1);
-        score.setFitxes3IA(0);
+        score.setFitxes3IA(1);
         score.setFitxes4IA(0);
         
         int resultat = score.getScore(Casella.Estat.HUMA);

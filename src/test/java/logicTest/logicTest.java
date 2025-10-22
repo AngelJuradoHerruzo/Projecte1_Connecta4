@@ -25,9 +25,6 @@ public class logicTest {
 
     private Tauler t;
     private Node node;
-    
-
-    
 
     @BeforeAll
     public static void setUpClass() {
@@ -83,46 +80,46 @@ public class logicTest {
 
     @Test
     void testColocarFitxaColumnaValida() {
-        boolean resultat = t.colocarFitxa(3,  Casella.Estat.JUGADOR_1);
+        boolean resultat = t.colocarFitxa(3,  Casella.Estat.HUMA);
         assertTrue(resultat, "Hauria de permetre col·locar una fitxa en una columna vàlida");
 
         int filaInferior = t.getFiles() - 1;
         Casella c = t.getCasella(filaInferior, 3);
-        assertEquals(Casella.Estat.JUGADOR_1, c.getEstat(), "La fitxa s'hauria de col·locar a la fila inferior");
+        assertEquals(Casella.Estat.HUMA, c.getEstat(), "La fitxa s'hauria de col·locar a la fila inferior");
     }
 
     @Test
     void testColocarFitxaColumnaPlena() {
         int col = 2;
         for (int i = 0; i < t.getFiles(); i++) {
-            assertTrue(t.colocarFitxa(col, Casella.Estat.JUGADOR_2));
+            assertTrue(t.colocarFitxa(col, Casella.Estat.IA));
         }
-        assertFalse(t.colocarFitxa(col, Casella.Estat.JUGADOR_2), "No hauria de permetre afegir més fitxes a una columna plena");
+        assertFalse(t.colocarFitxa(col, Casella.Estat.IA), "No hauria de permetre afegir més fitxes a una columna plena");
     }
 
     @Test
     void testColocarFitxaColumnaInvalida() {
-        assertFalse(t.colocarFitxa(-1, Casella.Estat.JUGADOR_1), "Columna negativa no vàlida");
-        assertFalse(t.colocarFitxa(10, Casella.Estat.JUGADOR_1), "Columna fora de rang no vàlida");
+        assertFalse(t.colocarFitxa(-1, Casella.Estat.HUMA), "Columna negativa no vàlida");
+        assertFalse(t.colocarFitxa(10, Casella.Estat.HUMA), "Columna fora de rang no vàlida");
     }
 
     @Test
     void testJugadaUsuariIA() {
-        assertTrue(t.colocarFitxa(0, Casella.Estat.JUGADOR_1));
-        assertTrue(t.colocarFitxa(1, Casella.Estat.JUGADOR_2));
+        assertTrue(t.colocarFitxa(0, Casella.Estat.HUMA));
+        assertTrue(t.colocarFitxa(1, Casella.Estat.IA));
 
         Casella c1 = t.getCasella(t.getFiles() - 1, 0);
         Casella c2 = t.getCasella(t.getFiles() - 1, 1);
 
-        assertEquals(Casella.Estat.JUGADOR_1, c1.getEstat(), "Casella de jugador hauria de tenir 'JUGADOR'");
-        assertEquals(Casella.Estat.JUGADOR_2, c2.getEstat(), "Casella de màquina hauria de tenir 'MAQUINA'");
+        assertEquals(Casella.Estat.HUMA, c1.getEstat(), "Casella de jugador hauria de tenir 'JUGADOR'");
+        assertEquals(Casella.Estat.IA, c2.getEstat(), "Casella de màquina hauria de tenir 'MAQUINA'");
     }
 
     @Test
     void testTaulerPle() {
         for (int c = 0; c < t.getColumnes(); c++) {
             for (int f = 0; f < t.getFiles(); f++) {
-                t.colocarFitxa(c, Casella.Estat.JUGADOR_1);
+                t.colocarFitxa(c, Casella.Estat.HUMA);
             }
         }
         assertTrue(t.estaPle(), "El tauler hauria d'estar ple");
@@ -222,7 +219,7 @@ public class logicTest {
         CreateTree.treeGeneration(node, 'X', 0, 1);
 
         Node primerFill = node.getHijos().get(0);
-        primerFill.getTauler().colocarFitxa(0, Casella.Estat.JUGADOR_1); // Modifiquem el fill
+        primerFill.getTauler().colocarFitxa(0, Casella.Estat.HUMA); // Modifiquem el fill
 
         assertEquals(Estat.BUIDA, node.getTauler().getCasella(t.getFiles() - 1, 0).getEstat(),
                 "El tauler del pare no hauria de canviar si modifiquem un fill");

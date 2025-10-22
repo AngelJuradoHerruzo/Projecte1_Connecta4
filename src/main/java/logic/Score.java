@@ -43,11 +43,10 @@ public class Score {
      * Mètode que emmagatzema totes les variables de tots els grups de fitxes del tauler.
      * 
      * @param tauler Tauler on es busquen les fitxes
-     * @param conjuntDeFitxes La quantitat del grup que es vol
      * @param estat Estat de les caselles
      */
   
-    public void numFitxesJuntes(Tauler tauler, int conjuntDeFitxes, Casella estat) {
+    public void numFitxesJuntes(Tauler tauler) {
         Fitxes_2_HUMA = 0;
         Fitxes_3_HUMA = 0;
         Fitxes_4_HUMA = 0;
@@ -203,4 +202,19 @@ public class Score {
         }
         return ScoreFinal;
     } 
+    
+    
+    /**************    .´SCORE.    **************
+     * Mètode que calcula un valor heurístic o score per a un jugador concret
+     * en un tauler determinat.
+     *
+     * @param tauler Tauler on es busquen les fitxes
+     * @param estat Estat del jugador (HUMA o IA)
+     * @return Valor heurístic calculat segons les fitxes agrupades
+     */
+    
+    public int score(Tauler tauler, Casella.Estat estat) {
+        numFitxesJuntes(tauler); // Recalcula las fitxes juntas para el tablero actual
+        return getScore(estat); // Devuelve el score final para el jugador pasado
+    }
 }
