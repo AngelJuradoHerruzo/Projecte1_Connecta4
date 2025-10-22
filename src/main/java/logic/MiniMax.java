@@ -39,7 +39,7 @@ public class MiniMax {
 
                 if (resultat.getValor() > millorValor) {
                     millorValor = resultat.getValor();
-                    millorNode = fill;
+                    millorNode = resultat;
                 }
             }
 
@@ -56,7 +56,7 @@ public class MiniMax {
 
                 if (resultat.getValor() < pitjorValor) {
                     pitjorValor = resultat.getValor();
-                    pitjorNode = fill;
+                    pitjorNode = resultat;
                 }
             }
 
@@ -64,4 +64,40 @@ public class MiniMax {
             return pitjorNode;
         }
     }
+    
+    /*
+    public Node minimaxPrueba(Node node, int depth, boolean maximizingPlayer) {
+    // Caso base: si llegamos a la profundidad 0 o no hay hijos
+    if (depth == 0 || node.getHijos().isEmpty()) {
+        // Ya tenemos el valor en node.getValor(), no hace falta score
+        return node;
+    }
+
+    if (maximizingPlayer) { // Turno de la IA -> maximizamos
+        int mejorValor = Integer.MIN_VALUE;
+        Node mejorNode = null;
+        for (Node hijo : node.getHijos()) {
+            Node resultado = minimaxPrueba(hijo, depth - 1, false);
+            if (resultado.getValor() > mejorValor) {
+                mejorValor = resultado.getValor();
+                mejorNode = resultado; // IMPORTANTE: usar resultado, no hijo
+            }
+        }
+        node.setValor(mejorValor);
+        return mejorNode;
+    } else { // Turno del humano -> minimizamos
+        int peorValor = Integer.MAX_VALUE;
+        Node peorNode = null;
+        for (Node hijo : node.getHijos()) {
+            Node resultado = minimaxPrueba(hijo, depth - 1, true);
+            if (resultado.getValor() < peorValor) {
+                peorValor = resultado.getValor();
+                peorNode = resultado; // usar resultado
+            }
+        }
+        node.setValor(peorValor);
+        return peorNode;
+    }
+}
+    */
 }
