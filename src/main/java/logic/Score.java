@@ -17,7 +17,27 @@ public class Score {
     
     int ScoreHUMA = 0;
     int ScoreIA = 0;
+   
     
+    /**************    .GETTERS PER A PROVES.    **************/
+    public int getFitxes2HUMA() { return Fitxes_2_HUMA; }
+    public int getFitxes3HUMA() { return Fitxes_3_HUMA; }
+    public int getFitxes4HUMA() { return Fitxes_4_HUMA; }
+
+    public int getFitxes2IA() { return Fitxes_2_IA; }
+    public int getFitxes3IA() { return Fitxes_3_IA; }
+    public int getFitxes4IA() { return Fitxes_4_IA; }
+    
+    
+    /**************    .SETTERS PER A PROVES.    **************/
+    public void setFitxes2HUMA(int val) { Fitxes_2_HUMA = val; }
+    public void setFitxes3HUMA(int val) { Fitxes_3_HUMA = val; }
+    public void setFitxes4HUMA(int val) { Fitxes_4_HUMA = val; }
+
+    public void setFitxes2IA(int val) { Fitxes_2_IA = val; }
+    public void setFitxes3IA(int val) { Fitxes_3_IA = val; }
+    public void setFitxes4IA(int val) { Fitxes_4_IA = val; }
+
     
     /**************    .NOMBRE DE FITXES JUNTES.    **************
      * Mètode que emmagatzema totes les variables de tots els grups de fitxes del tauler.
