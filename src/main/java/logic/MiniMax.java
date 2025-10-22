@@ -5,6 +5,7 @@
 package logic;
 
 import entities.Casella;
+import logic.Score;
 
 /**
  *
