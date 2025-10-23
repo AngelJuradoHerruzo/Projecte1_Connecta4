@@ -1,14 +1,22 @@
-# Projecte1_Connecta4
+# Connect 4 amb IA (Minimax)
 
-Aquest projecte és una implementació del joc Connecta 4 desenvolupada amb Java com a part del Projecte 1 del cicle DAM.
+Aquest projecte implementa el joc clàssic **4 en ratlla (Connect 4)** en **Java**, on el jugador humà competeix contra una **intel·ligència artificial** que utilitza l’algorisme **Minimax** per decidir les seves jugades.
 
-## Objectiu
-Recrear el joc de taula on un jugador competeix contra la IA per connectar quatre fitxes del mateix color en línia (horitzontal, vertical o diagonal).
+---
 
-## Estructura del projecte
-- `nbproject/` → fitxers de configuració de NetBeans  
-- `src/` → codi font Java  
-- `pom.xml` → fitxer de Maven (si s'utilitza)  
+## 🎯 Objectiu del joc
+L’objectiu és col·locar **quatre fitxes consecutives** (horitzontalment, verticalment o en diagonal) abans que l’oponent.  
+El jugador humà juga amb les fitxes `O` i la IA amb `X`.
 
-## Executar
-Compilar i executar el projecte amb NetBeans o Maven.
+---
+
+## ⚙️ Funcionament bàsic
+- El programa es juga per **consola**.  
+- Cada torn s’alterna entre el jugador humà i la IA.  
+- La IA analitza el tauler amb l’algorisme **Minimax**, a una profunditat configurada (per defecte 7).  
+- Es calcula una **heurística (Score)** per valorar cada situació del tauler i triar la millor opció.  
+- Quan algú connecta quatre fitxes o el tauler està ple, la partida acaba.
+
+---
+
+## 🧩 Estructura del projecte
