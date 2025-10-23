@@ -93,14 +93,16 @@ public class Score {
                         count++;
                     } 
                     else { // Quan la seqüència es trenca
-                        if (count == grup) {
-                            comptador++; // Només comptem si és exactament del tamany desitjat
+                        
+                        // Si el grup és 4, compta seqüències de 4 o més; si no, només compta seqüències exactes
+                        if (grup == 4 ? count >= grup : count == grup) {
+                            comptador++;    
                         }
                         count = 0;
                     }
                 }
-
-                if (count == grup) comptador++; // Comprovem al final de la seqüència
+                // Comprovem al final de la seqüència
+                if (grup == 4 ? count >= grup : count == grup) comptador++;
             }
         }
         
@@ -130,18 +132,13 @@ public class Score {
                         }
                     }
                     
-                    if (count == grup) comptador++; // Comprovem al final de la seqüència
+                    if (grup == 4 ? count >= grup : count == grup) comptador++;
                 }
             }
         }
         
         return comptador; // Retorna el nombre de grups trobats
-    }    
-    public Casella.Estat hayGanador() {
-    if (Fitxes_4_HUMA > 0) return Casella.Estat.HUMA;
-    if (Fitxes_4_IA > 0) return Casella.Estat.IA;
-    return Casella.Estat.BUIDA;
-}
+    }      
         
         
     /**************    .GET SCORE.    **************
@@ -152,8 +149,8 @@ public class Score {
     
     public int getScore(Casella.Estat estat) {
         int ScoreFinal = 0;
-        ScoreHUMA = (Fitxes_2_HUMA * 40) + (Fitxes_3_HUMA * 300) + (Fitxes_4_HUMA * 100000);
-        ScoreIA = (Fitxes_2_IA * 40) + (Fitxes_3_IA * 300) + (Fitxes_4_IA * 100000);
+        ScoreHUMA = (Fitxes_2_HUMA * 2) + (Fitxes_3_HUMA * 3) + (Fitxes_4_HUMA * 100000);
+        ScoreIA = (Fitxes_2_IA * 2) + (Fitxes_3_IA * 3) + (Fitxes_4_IA * 100000);
         
         switch (estat) {
             case (Casella.Estat.HUMA):  // HUMA
@@ -185,4 +182,9 @@ public class Score {
         numFitxesJuntes(tauler); // Recalcula las fitxes juntas para el tablero actual
         return getScore(estat); // Devuelve el score final para el jugador pasado
     }
+    public Casella.Estat hayGanador() {
+    if (Fitxes_4_HUMA > 0) return Casella.Estat.HUMA;
+    if (Fitxes_4_IA > 0) return Casella.Estat.IA;
+    return Casella.Estat.BUIDA;
+}
 }
