@@ -23,24 +23,21 @@ El jugador humà juga amb les fitxes `O` i la IA amb `X`.
 📦 Projecte1_Grup4
 
 ├── game/
-
-│ ├── Mecanica.java         → Control del flux de joc i torns
-
-│ ├── Projecte1_Grup4.java  → Classe principal (main)
-
-│ └── GameText.java         → Textos i missatges per consola
-
+│   ├── Mecanica.java         → Control del flux de joc i torns
+│   ├── Projecte1_Grup4.java  → Classe principal (main)
+│   └── GameText.java         → Textos i missatges per consola
 │
 ├── logic/
-│ ├── Node.java         → Representació d’un estat del tauler
-│ ├── CreateTree.java   → Generació de l’arbre de moviments
-│ ├── MiniMax.java      → Implementació de l’algorisme Minimax
-│ ├── Score.java        → Funció heurística d’avaluació
-│ └── LogicaJoc.java    → Gestió de la IA i connexió amb el joc
+│   ├── Node.java         → Representació d’un estat del tauler
+│   ├── CreateTree.java   → Generació de l’arbre de moviments
+│   ├── MiniMax.java      → Implementació de l’algorisme Minimax
+│   ├── Score.java        → Funció heurística d’avaluació
+│   └── LogicaJoc.java    → Gestió de la IA i connexió amb el joc
 │
 └── entities/
-├── Tauler.java     → Representació del tauler (7x6)
-└── Casella.java    → Estat de cada casella (BUIDA, HUMA, IA)
+    ├── Tauler.java     → Representació del tauler (7x6)
+    └── Casella.java    → Estat de cada casella (BUIDA, HUMA, IA)
+
 
 ## 👥 Autors
 - Ángel Delgado Girón
