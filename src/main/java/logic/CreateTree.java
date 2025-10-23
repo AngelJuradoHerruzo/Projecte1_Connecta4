@@ -4,6 +4,7 @@
  */
 package logic;
 
+import entities.Casella;
 import entities.Tauler;
 
 /**
@@ -12,28 +13,36 @@ import entities.Tauler;
  */
 public class CreateTree {
   
-    public static void treeGeneration(Node node, char jugador, int profundidad, int maxProfundidad){
-        
-        if(profundidad >= maxProfundidad)return; //para detenerlo si llegamos al final de le arbol
+     public static void treeGeneration(Node node, Casella.Estat jugador, int profundidad, int maxProfundidad) {
+        // Caso base: si llegamos a la profundidad máxima, detenemos la recursión
+        if (profundidad >= maxProfundidad) return;
+
         for (int col = 0; col < 7; col++) {
-            
-            Tauler copy = new Tauler(node.getTauler()); // utilizamos una copia para no modificar el tablero original
+            Tauler copy = new Tauler(node.getTauler()); // Copiamos el tablero actual
+
+            // Si la columna no está llena
             if (!copy.isColumnFull(col)) {
-                // hacemos la  jugada según el jugador actual
                 boolean jugadaExitosa;
-                if (jugador == 'X') {
-                    jugadaExitosa = copy.jugadaJugador_1(col); // 'X' -> JUGADOR_1
+
+                // Realizamos la jugada según el jugador actual
+                if (jugador == Casella.Estat.IA) {
+                    jugadaExitosa = copy.jugadaJugador_1(col); // 'X' → Huma
                 } else {
-                    jugadaExitosa = copy.jugadaJugador_2(col); // 'O' -> JUGADOR_2
+                    jugadaExitosa = copy.jugadaJugador_2(col); // 'O' → IA
                 }
 
-                // si la jugada esta bien  añadimos el nodo hijo y seguimos generando
+                // Si la jugada es válida, creamos un nuevo nodo hijo
                 if (jugadaExitosa) {
                     Node hijo = new Node(copy);
+
+                    // 🔹 Asignamos la columna de la jugada al hijo
+                    hijo.setColumnaSeleccionada(col);
+
+                    // Añadimos el hijo al nodo actual
                     node.addHijo(hijo);
 
-                    // Alternamos jugador
-                    char siguientejugador = (jugador == 'X') ? 'O' : 'X';
+                    // Alternamos el jugador y generamos los hijos del siguiente turno
+                    Casella.Estat siguientejugador = (jugador == Casella.Estat.IA) ? Casella.Estat.HUMA : Casella.Estat.IA;
                     treeGeneration(hijo, siguientejugador, profundidad + 1, maxProfundidad);
                 }
             }
