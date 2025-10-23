@@ -22,7 +22,7 @@ public class Mecanica {
     
     private int tornActual = 0;
     private int columnaNovaFicha;
-    private Casella.Estat jugadorActual = Casella.Estat.JUGADOR_1;
+    private Casella.Estat jugadorActual = Casella.Estat.HUMA;
     
 
 public Mecanica(Tauler taulerExistente) {
@@ -184,9 +184,9 @@ public Mecanica(Tauler taulerExistente) {
 
     // Cambiar el jugador actual según el turno
     if (tornActual % 2 == 1) {
-        jugadorActual = Casella.Estat.JUGADOR_1;
+        jugadorActual = Casella.Estat.HUMA;
     } else {
-        jugadorActual = Casella.Estat.JUGADOR_2; // IA
+        jugadorActual = Casella.Estat.IA; // IA
     }
 }   
     public void iniciarPartida(Scanner scanner , GameText textos){
@@ -199,7 +199,7 @@ public Mecanica(Tauler taulerExistente) {
         alternarTurno();
         textos.mostrarTorn(this);
         tauler.mostrarTauler();
-            if (jugadorActual == Casella.Estat.JUGADOR_1) {
+            if (jugadorActual == Casella.Estat.HUMA) {
                 // TURNO DEL USUARIO
                 textos.mostrarTornPj();
                 textos.afegirFichaText();
@@ -229,7 +229,5 @@ public Mecanica(Tauler taulerExistente) {
             return; //termina partida
         }
     }
-    }
-        
-    }
-    
+    }      
+}  

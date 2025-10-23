@@ -43,9 +43,9 @@ public class LogicaJoc {
 
                 if (estat == Casella.Estat.BUIDA) {
                     System.out.print("|   ");
-                } else if (estat == Casella.Estat.JUGADOR_1) {
+                } else if (estat == Casella.Estat.HUMA) {
                     System.out.print("| X ");
-                } else if (estat == Casella.Estat.JUGADOR_2) {
+                } else if (estat == Casella.Estat.IA) {
                     System.out.print("| O ");
                 }
             }
@@ -84,7 +84,7 @@ public class LogicaJoc {
     Node raiz = new Node(clonarTauler(taulerActual));
 
     // Llamamos a Minimax (maximizador = IA)
-    Node mejor = miniMax.minimax(raiz, profundidad, true, Casella.Estat.JUGADOR_2);
+    Node mejor = miniMax.minimax(raiz, profundidad, true, Casella.Estat.IA);
 
     // Devolvemos la columna seleccionada
     return mejor.getColumnaSeleccionada();

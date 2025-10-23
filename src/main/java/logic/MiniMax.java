@@ -5,6 +5,7 @@
 package logic;
 
 import entities.Casella;
+import logic.Score;
 
 /**
  *
@@ -21,10 +22,10 @@ public class MiniMax {
      * @return Node que representa la millor jugada per a la IA
      */
     public Node minimax(Node node, int depth, boolean maximizingPlayer, Casella.Estat jugadorIA) {
-
         // Caso base: si llegamos al final de la profundidad o no hay hijos
         if (depth == 0 || node.getHijos().isEmpty()) {
-            int valor = Score.score(node.getTauler(), jugadorIA); // heurística
+            Score scoreObj = new Score(); // <-- Creamos el objeto aquí
+            int valor = scoreObj.score(node.getTauler(), jugadorIA); // <-- Calculamos heurística
             node.setValor(valor);
             return node;
         }

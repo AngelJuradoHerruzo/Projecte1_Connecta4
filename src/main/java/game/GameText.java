@@ -70,8 +70,8 @@ public class GameText {
     public void mostrarGanador(Casella.Estat jugador) {
         System.out.println();
         switch (jugador) {
-            case JUGADOR_1 -> System.out.println("🏆 " + pjName + " ha guanyat la partida!");
-            case JUGADOR_2 -> System.out.println("💻 La IA ha guanyat. Serà la propera vegada, " + pjName + "!");
+            case HUMA -> System.out.println("🏆 " + pjName + " ha guanyat la partida!");
+            case IA -> System.out.println("💻 La IA ha guanyat. Serà la propera vegada, " + pjName + "!");
             default -> System.out.println("🤝 Empat! Bona partida!");
         }
         System.out.println();

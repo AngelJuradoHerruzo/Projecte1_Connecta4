@@ -117,11 +117,11 @@ public Tauler(Tauler otro) {
     }
     
     public boolean jugadaJugador_1(int columna) { // Realitzar una jugada del JUGADOR_1
-        return colocarFitxa(columna, Casella.Estat.JUGADOR_1);
+        return colocarFitxa(columna, Casella.Estat.HUMA);
     }
     
     public boolean jugadaJugador_2(int columna) { // Realitzar una jugada del JUGADOR_2
-        return colocarFitxa(columna, Casella.Estat.JUGADOR_2);
+        return colocarFitxa(columna, Casella.Estat.IA);
     }
     
     
@@ -169,18 +169,6 @@ public Tauler(Tauler otro) {
 
         return sb.toString();
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     public void mostrarTauler() {
