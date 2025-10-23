@@ -20,6 +20,7 @@ El jugador humà juga amb les fitxes `O` i la IA amb `X`.
 ---
 
 ## 🧩 Estructura del projecte
+```
 📦 Projecte1_Grup4
 
 ├── game/
@@ -37,7 +38,9 @@ El jugador humà juga amb les fitxes `O` i la IA amb `X`.
 └── entities/
     ├── Tauler.java     → Representació del tauler (7x6)
     └── Casella.java    → Estat de cada casella (BUIDA, HUMA, IA)
+```
 
+---
 
 ## 👥 Autors
 - Ángel Delgado Girón
