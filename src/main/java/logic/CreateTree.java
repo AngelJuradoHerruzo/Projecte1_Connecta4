@@ -26,9 +26,9 @@ public class CreateTree {
 
                 // Realizamos la jugada según el jugador actual
                 if (jugador == Casella.Estat.IA) {
-                jugadaExitosa = copy.jugadaJugador_1(col); // IA → X
+                jugadaExitosa = copy.jugadaJugador_2(col); // IA → X
                 } else {
-                jugadaExitosa = copy.jugadaJugador_2(col); // HUMA → O
+                jugadaExitosa = copy.jugadaJugador_1(col); // HUMA → O
                 }
 
                 // Si la jugada es válida, creamos un nuevo nodo hijo
