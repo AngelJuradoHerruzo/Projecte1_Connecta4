@@ -21,6 +21,8 @@ public class Mecanica {
     private Tauler tauler;
     LogicaJoc logica = new LogicaJoc();
     
+    
+    private static final int profunditat_IA = 7;
     private int tornActual = 0;
     private int columnaNovaFicha;
     private Casella.Estat jugadorActual = Casella.Estat.HUMA;
@@ -32,11 +34,24 @@ public Mecanica(Tauler taulerExistente) {
     public int getTornActual() {
     return tornActual;
 }
-    public void afegirFichaMecanica(){
-}
     public int getColumnaNovaFicha() {
     return columnaNovaFicha;
 }
+    
+    public Casella.Estat getJugadorActual() {
+    return jugadorActual;
+    }
+    public void alternarTurno(){
+        // Incrementar el turno
+    tornActual++;
+
+    // Cambiar el jugador actual según el turno
+    if (tornActual % 2 == 1) {
+        jugadorActual = Casella.Estat.HUMA;
+    } else {
+        jugadorActual = Casella.Estat.IA; // IA
+    }
+}   
     
         // 1️⃣ Método para pedir y validar columna
     public void fichaJugada(Scanner scanner, Casella.Estat jugador) {
@@ -87,17 +102,7 @@ public Mecanica(Tauler taulerExistente) {
     score.numFitxesJuntes(tauler);
     return score.hayGanador() == jugador;
 }
-    public void alternarTurno(){
-        // Incrementar el turno
-    tornActual++;
-
-    // Cambiar el jugador actual según el turno
-    if (tornActual % 2 == 1) {
-        jugadorActual = Casella.Estat.HUMA;
-    } else {
-        jugadorActual = Casella.Estat.IA; // IA
-    }
-}   
+    
     public void iniciarPartida(Scanner scanner , GameText textos){
          // Mostrar información inicial y pedir nombre
         textos.infoInici();
@@ -119,7 +124,7 @@ public Mecanica(Tauler taulerExistente) {
                     //  TURNO DE LA IA 
                     textos.mostrarTornIA();
                 // Llamamos al método auxiliar
-                    columnaNovaFicha = logica.calcularMejorColumnaIA(tauler, 7); // profundidad 6
+                    columnaNovaFicha = logica.calcularMejorColumnaIA(tauler, profunditat_IA); // profundidad 7
     
                     colocarUltimaFicha(jugadorActual);
                     textos.columnaEscollidaIAText(columnaNovaFicha);
