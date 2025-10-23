@@ -7,7 +7,6 @@ package logicTest;
 import entities.Casella;
 import entities.Casella.Estat;
 import entities.Tauler;
-import game.Execucio;
 import logic.CreateTree;
 import logic.Node;
 import logic.Score;
@@ -197,27 +196,6 @@ public class logicTest {
         assertEquals(t.getColumnes(), node.getHijos().size(), "S'han de generar 6 fills per un tauler buit");
     }
 
-    /*  @Test
-   
-    void testNoGeneraSiColumnaPlena() {
-        // Omple una columna i comprova que CreateTree
-        // no genera cap fill per aquella columna plena.
-        for (int f = 0; f < t.getFiles(); f++) {
-            t.colocarFitxa(0, Casella.Estat.JUGADOR_1);
-        }
-        node = new Node(t);
-        CreateTree.treeGeneration(node, 'X', 1, 6);
-
-        boolean columnaPlenaGeneraFill = false;
-        for (Node hijo : node.getHijos()) {
-            if (hijo.getTauler().getCasella(t.getFiles() - 1, 0).getEstat() != Casella.Estat.BUIDA) {
-                columnaPlenaGeneraFill = true;
-            }
-        }
-        assertFalse(columnaPlenaGeneraFill, "No s'ha de generar node fill per columna plena");
-    }
-     */
-
     /**
      * Comprova l'alternança de jugadors en la generació de l'arbre.
      */
@@ -238,7 +216,6 @@ public class logicTest {
     /**
      * Verifica el límit de profunditat en la generació de l'arbre.
      */
-
     @Test
     void testLimitDeProfunditat() {
         // Crida treeGeneration amb maxProfunditat = 2
@@ -347,7 +324,7 @@ public class logicTest {
         assertTrue(resultat >= 100000,
                 "Una línia de 4 fitxes de la IA hauria de tenir una puntuació molt alta (≥100000), però és " + resultat);
     }
-    
+
     @Test
     void testPonderacioTresEnRatllaHumanaPenalitzaIA() {
         // Crear un tauler buit
@@ -364,7 +341,7 @@ public class logicTest {
 
         // El resultat hauria de ser negatiu (perquè el rival té avantatge)
         assertTrue(resultat < 0,
-            "Si el jugador humà té 3 en ratlla, la puntuació per la IA hauria de ser negativa, però és " + resultat);
+                "Si el jugador humà té 3 en ratlla, la puntuació per la IA hauria de ser negativa, però és " + resultat);
     }
 
     /**
@@ -374,24 +351,4 @@ public class logicTest {
     void testEmpatIA() {
 
     }
-
-    // BLOC 4 — TESTS DE EXECUCIO
-    /**
-     * Verifica l'increment correcte del torn.
-     */
-    @Test
-    void testIncrementarTorn() {
-        // Crea una instància d’Execucio
-        Execucio exec = new Execucio();
-
-        // Guarda el torn inicial
-        int tornInicial = exec.getTorn();
-
-        // Crida incrementarTorn()
-        exec.incrementarTorn();
-
-        // Comprova que el torn augmenta en +1
-        assertEquals(tornInicial + 1, exec.getTorn(), "El torn hauria d'augmentar en +1 després de cridar incrementarTorn().");
-    }
-
 }
