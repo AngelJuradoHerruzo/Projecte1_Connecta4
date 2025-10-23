@@ -93,14 +93,16 @@ public class Score {
                         count++;
                     } 
                     else { // Quan la seqüència es trenca
-                        if (count == grup) {
-                            comptador++; // Només comptem si és exactament del tamany desitjat
+                        
+                        // Si el grup és 4, compta seqüències de 4 o més; si no, només compta seqüències exactes
+                        if (grup == 4 ? count >= grup : count == grup) {
+                            comptador++;    
                         }
                         count = 0;
                     }
                 }
-
-                if (count == grup) comptador++; // Comprovem al final de la seqüència
+                // Comprovem al final de la seqüència
+                if (grup == 4 ? count >= grup : count == grup) comptador++;
             }
         }
         
@@ -130,13 +132,13 @@ public class Score {
                         }
                     }
                     
-                    if (count == grup) comptador++; // Comprovem al final de la seqüència
+                    if (grup == 4 ? count >= grup : count == grup) comptador++;
                 }
             }
         }
         
         return comptador; // Retorna el nombre de grups trobats
-    }    
+    }      
         
         
     /**************    .GET SCORE.    **************
