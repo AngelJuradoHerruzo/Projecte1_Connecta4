@@ -210,7 +210,7 @@ public Mecanica(Tauler taulerExistente) {
                     //  TURNO DE LA IA 
                     textos.mostrarTornIA();
                 // Llamamos al método auxiliar
-                    columnaNovaFicha = logica.calcularMejorColumnaIA(tauler, 6); // profundidad 6
+                    columnaNovaFicha = logica.calcularMejorColumnaIA(tauler, 7); // profundidad 6
     
                     colocarUltimaFicha(jugadorActual);
                     textos.columnaEscollidaIAText(columnaNovaFicha);

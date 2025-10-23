@@ -78,15 +78,20 @@ public class LogicaJoc {
         return copia;
     }
     public int calcularMejorColumnaIA(Tauler taulerActual, int profundidad) {
-       MiniMax miniMax = new MiniMax();
+    MiniMax miniMax = new MiniMax();
 
-    // Usamos una copia del tablero para no modificar el original
+    // 1️⃣ Creamos el nodo raíz con una copia del tablero actual
     Node raiz = new Node(clonarTauler(taulerActual));
 
-    // Llamamos a Minimax (maximizador = IA)
+    // 2️⃣ Generamos el árbol de movimientos hasta la profundidad indicada
+    //    'O' representa a la IA, 'X' al humano
+    CreateTree.treeGeneration(raiz, Casella.Estat.HUMA, 0, profundidad);
+
+    // 3️⃣ Llamamos a minimax sobre la raíz
+    //    maximizingPlayer = true porque es turno de la IA
     Node mejor = miniMax.minimax(raiz, profundidad, true, Casella.Estat.IA);
 
-    // Devolvemos la columna seleccionada
+    // 4️⃣ Devolvemos la columna seleccionada de la mejor jugada
     return mejor.getColumnaSeleccionada();
 }
 }
