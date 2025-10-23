@@ -10,6 +10,7 @@ import entities.Tauler;
 import game.Execucio;
 import logic.CreateTree;
 import logic.Node;
+import logic.Score;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
@@ -192,7 +193,7 @@ public class logicTest {
         // Crea un Node amb un tauler buit
         // Executa treeGeneration(node, 'X', 0, 1)
         // Comprova que es generen x fills (un per cada columna possible).
-        CreateTree.treeGeneration(node, 'X', 0, 1);
+        CreateTree.treeGeneration(node, Casella.Estat.IA, 0, 1);
         assertEquals(t.getColumnes(), node.getHijos().size(), "S'han de generar 6 fills per un tauler buit");
     }
 
@@ -224,7 +225,7 @@ public class logicTest {
     void testAlternanciaJugadors() {
         // Comprova que si el node pare és 'X',
         // els fills generats són del jugador 'O'.
-        CreateTree.treeGeneration(node, 'X', 0, 1);
+        CreateTree.treeGeneration(node, Casella.Estat.IA, 0, 1);
 
         for (Node f : node.getHijos()) {
             String jugadorSeguent = f.getTauler().getCasella(
@@ -242,7 +243,7 @@ public class logicTest {
     void testLimitDeProfunditat() {
         // Crida treeGeneration amb maxProfunditat = 2
         // i comprova que cap node s’ha generat amb profunditat > 2.
-        CreateTree.treeGeneration(node, 'X', 0, 2);
+        CreateTree.treeGeneration(node, Casella.Estat.IA, 0, 2);
 
         boolean profunditatMajor2 = false;
         for (Node f : node.getHijos()) {
@@ -262,7 +263,7 @@ public class logicTest {
     void testCopiaDeTaulerIndependent() {
         // Comprova que els taulers dels fills són còpies independents:
         // si modifiques un fill, el tauler del pare no canvia.
-        CreateTree.treeGeneration(node, 'X', 0, 1);
+        CreateTree.treeGeneration(node, Casella.Estat.IA, 0, 1);
 
         Node primerFill = node.getHijos().get(0);
         primerFill.getTauler().colocarFitxa(0, Casella.Estat.HUMA); // Modifiquem el fill
@@ -277,7 +278,7 @@ public class logicTest {
     @Test
     void testNumeroMaximDeFills() {
         // Comprova que cap node té més de 6 fills.
-        CreateTree.treeGeneration(node, 'X', 0, 1);
+        CreateTree.treeGeneration(node, Casella.Estat.IA, 0, 1);
 
         for (Node f : node.getHijos()) {
             assertTrue(f.getHijos().size() <= 7, "Cap node fill hauria de tenir més de 7 fills");
