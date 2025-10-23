@@ -11,6 +11,7 @@ import java.util.Scanner;
 import logic.LogicaJoc;
 import logic.MiniMax;
 import logic.Node;
+import logic.Score;
 
 /**
  *
@@ -81,103 +82,11 @@ public Mecanica(Tauler taulerExistente) {
         return colocada; // devuelve true si la ficha se colocó correctamente
     }
     
-    public boolean comprobarGanador(Casella.Estat jugador){        //se comprueba solo a partir de la ultima ficha, IMPORTANTE se comprueba siempre despues de añadir una ficha al tablero
-        int fila = -1;
-        int files = tauler.getFiles();
-        int columnes = tauler.getColumnes();
-
-      // Buscar la fila de la última ficha colocada en la columna
-        for (int i = 0; i < files; i++) {
-            if (tauler.getCasella(i, columnaNovaFicha).getEstat() == jugador) {
-                fila = i;
-                break;
-            }
-        }
-        if (fila == -1) return false; // no se encontró la ficha (por seguridad) en teoria siempre se pude encontarr por el control de errrores del metodo colocar ficha
-
-        int contador;
-
-        // horizontal
-        contador = 1;
-        // contar fichas a la izquierda
-                int colActual = columnaNovaFicha - 1;
-                while (colActual >= 0 && tauler.getCasella(fila, colActual).getEstat() == jugador) {
-                    contador++;
-                    colActual--;
-                    }
-        // contar fichas a la derecha
-                colActual = columnaNovaFicha + 1;
-                while (colActual < columnes && tauler.getCasella(fila, colActual).getEstat() == jugador) {
-                contador++;
-                colActual++;
-                }
-                if (contador >= 4) return true;
-
-    // vertical
-        // contar fichas hacia arriba
-         contador = 1;
-         int filaActual = fila - 1;
-         while (filaActual >= 0 && tauler.getCasella(filaActual, columnaNovaFicha).getEstat() == jugador) {
-             contador++;
-             filaActual--;
-             }
-         
-        // contar fichas hacia abajo
-        filaActual = fila + 1;
-        while (filaActual < files && tauler.getCasella(filaActual, columnaNovaFicha).getEstat() == jugador) {
-            contador++;
-            filaActual++;
-            }
-    if (contador >= 4) return true;
-
-    // diagonal \
-     contador = 1;
-
-        // arriba-izquierda
-         filaActual = fila - 1;
-        colActual = columnaNovaFicha - 1;
-        while (filaActual >= 0 && colActual >= 0 && tauler.getCasella(filaActual, colActual).getEstat() == jugador) {
-            contador++;
-            filaActual--;
-            colActual--;
-            }
-        // abajo-derecha
-        filaActual = fila + 1;
-        colActual = columnaNovaFicha + 1;
-        while (filaActual < files && colActual < columnes && tauler.getCasella(filaActual, colActual).getEstat() == jugador) {
-            contador++;
-            filaActual++;
-            colActual++;
-            }
-    if (contador >= 4) return true;
-    
-    
-    // diagonal secundaria / 
-    
-    contador = 1;
-
-    // arriba-derecha
-    filaActual = fila - 1;
-    colActual = columnaNovaFicha + 1;
-    while (filaActual >= 0 && colActual < columnes && tauler.getCasella(filaActual, colActual).getEstat() == jugador) {
-        contador++;
-        filaActual--;
-        colActual++;
-    }
-
-    // abajo-izquierda
-    filaActual = fila + 1;
-    colActual = columnaNovaFicha - 1;
-    while (filaActual < files && colActual >= 0 && tauler.getCasella(filaActual, colActual).getEstat() == jugador ) {
-        contador++;
-        filaActual++;
-        colActual--;
-    }
-
-    if (contador >= 4) return true;
-
-    return false; // no hay ganador
-    }
+   public boolean comprobarGanador(Casella.Estat jugador) {
+    Score score = new Score();
+    score.numFitxesJuntes(tauler);
+    return score.hayGanador() == jugador;
+}
     public void alternarTurno(){
         // Incrementar el turno
     tornActual++;
