@@ -147,8 +147,8 @@ public class Score {
     
     public int getScore(Casella.Estat estat) {
         int ScoreFinal = 0;
-        ScoreHUMA = (Fitxes_2_HUMA * 2) + (Fitxes_3_HUMA * 3) + (Fitxes_4_HUMA * 100000);
-        ScoreIA = (Fitxes_2_IA * 2) + (Fitxes_3_IA * 3) + (Fitxes_4_IA * 100000);
+        ScoreHUMA = (Fitxes_2_HUMA * 40) + (Fitxes_3_HUMA * 300) + (Fitxes_4_HUMA * 100000);
+        ScoreIA = (Fitxes_2_IA * 40) + (Fitxes_3_IA * 300) + (Fitxes_4_IA * 100000);
         
         switch (estat) {
             case (Casella.Estat.HUMA):  // HUMA
