@@ -137,6 +137,11 @@ public class Score {
         
         return comptador; // Retorna el nombre de grups trobats
     }    
+    public Casella.Estat hayGanador() {
+    if (Fitxes_4_HUMA > 0) return Casella.Estat.HUMA;
+    if (Fitxes_4_IA > 0) return Casella.Estat.IA;
+    return Casella.Estat.BUIDA;
+}
         
         
     /**************    .GET SCORE.    **************
