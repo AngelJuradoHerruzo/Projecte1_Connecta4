@@ -9,8 +9,13 @@ public class Casella {
     //ESTATS POSSIBLES DE LA CASELLA
     public enum Estat {
         BUIDA("-"),
-        JUGADOR_1("O"),
-        JUGADOR_2("X");
+        HUMA("O"),
+        IA("X");
+        
+   
+    
+        
+        
         
         private final String simbol;
         
@@ -18,12 +23,21 @@ public class Casella {
             this.simbol = simbol;
         }
         
+        
+        
+        
+        
         public String getSimbol() {
             return simbol;
         }
     }
     
     private Estat estat;
+    
+    public Casella(Estat estat) {
+    this.estat = estat;
+}
+
     
     //CONSTRUCTOR
     public Casella() {

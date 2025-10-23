@@ -23,6 +23,20 @@ public class Tauler {
         return columnes;
     }
     
+// Constructor de copia
+public Tauler(Tauler otro) {
+    this.files = otro.files;
+    this.columnes = otro.columnes;
+    this.caselles= new Casella[files][columnes];
+    
+    for (int i = 0; i < files; i++) {
+        for (int j = 0; j < columnes; j++) {
+            // Crear una nueva casilla copiando el estado de la original
+            this.caselles[i][j] = new Casella(otro.caselles[i][j].getEstat());
+        }
+    }
+}
+    
     /**
      * Obté una casella específica del tauler.
      * Aquest mètode és útil per a la lògica de comprovació de victòries.
@@ -103,11 +117,11 @@ public class Tauler {
     }
     
     public boolean jugadaJugador_1(int columna) { // Realitzar una jugada del JUGADOR_1
-        return colocarFitxa(columna, Casella.Estat.JUGADOR_1);
+        return colocarFitxa(columna, Casella.Estat.HUMA);
     }
     
     public boolean jugadaJugador_2(int columna) { // Realitzar una jugada del JUGADOR_2
-        return colocarFitxa(columna, Casella.Estat.JUGADOR_2);
+        return colocarFitxa(columna, Casella.Estat.IA);
     }
     
     
@@ -129,10 +143,33 @@ public class Tauler {
     }
     
     
+// Comprueba si la columna está llena
+    public boolean isColumnFull(int columna) {
+    // La columna está llena si la casilla de la fila superior no está vacía
+        return !caselles[0][columna].estaBuida();
+    }
+    
     /**************    .MÈTODES DE VISUALITZACIÓ.    **************
      * Mostra el tauler actual per la consola amb un format llegible.
      * Utilitza els símbols de cada casella per representar l'estat del joc.
      */
+    
+    
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < files; i++) {
+            for (int j = 0; j < columnes; j++) {
+                sb.append(caselles[i][j].getSimbol());
+                if (j < columnes - 1) sb.append(" "); // espacio entre casillas
+            }
+            sb.append("\n"); // salto de línea al final de cada fila
+        }
+
+        return sb.toString();
+    }
+    
     
     public void mostrarTauler() {
         System.out.println("-------------------------- TAULER ACTUAL --------------------------\n");
@@ -141,7 +178,7 @@ public class Tauler {
         //IMPRIMIR CAPÇALERA DE COLUMNES
         System.out.print("       |");
         for (int j = 0; j < columnes; j++) {
-            System.out.print(" Col " + (j + 1) + " |");
+            System.out.print(" Col " + j + " |");
         }
         System.out.println();
 
@@ -156,7 +193,7 @@ public class Tauler {
         
         //IMPRIMIR CADA FILA DEL TAULER
         for (int i = 0; i < files; i++) {
-            System.out.print("Fila " + (files - i) + " |"); // Nom de la fila
+            System.out.print("Fila " + i + " |"); // Nom de la fila
 
             for (int j = 0; j < columnes; j++) { // Contingut de cada casella de la fila
                 String simbol = caselles[i][j].getSimbol();
@@ -171,6 +208,7 @@ public class Tauler {
             System.out.println();
         }
         System.out.println();
+        
     }
 }
 
@@ -182,9 +220,7 @@ public class Tauler {
 
 -------------------------- TAULER ACTUAL --------------------------
 
-       | Col 1 | Col 2 | Col 3 | Col 4 | Col 5 | Col 6 | Col 7 |
--------|-------|-------|-------|-------|-------|-------|-------|
-Fila 6 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+       | Col 0 | Col 1 | Col 2 | Col 3 | Col 4 | Col 5 | Col 6 |
 -------|-------|-------|-------|-------|-------|-------|-------|
 Fila 5 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
 -------|-------|-------|-------|-------|-------|-------|-------|
@@ -195,6 +231,8 @@ Fila 3 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
 Fila 2 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
 -------|-------|-------|-------|-------|-------|-------|-------|
 Fila 1 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
+-------|-------|-------|-------|-------|-------|-------|-------|
+Fila 0 |   -   |   -   |   -   |   -   |   -   |   -   |   -   |
 -------|-------|-------|-------|-------|-------|-------|-------|
 
 **/
