@@ -11,22 +11,13 @@ public class Casella {
         BUIDA("-"),
         HUMA("O"),
         IA("X");
-        
    
-    
-        
-        
-        
         private final String simbol;
         
         Estat(String simbol) {
             this.simbol = simbol;
         }
-        
-        
-        
-        
-        
+          
         public String getSimbol() {
             return simbol;
         }
@@ -38,7 +29,6 @@ public class Casella {
     this.estat = estat;
 }
 
-    
     //CONSTRUCTOR
     public Casella() {
         this.estat = Estat.BUIDA; // La casella està buida per defecte
