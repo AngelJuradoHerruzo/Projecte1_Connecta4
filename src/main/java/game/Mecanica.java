@@ -143,5 +143,41 @@ public Mecanica(Tauler taulerExistente) {
             return; //termina partida
         }
     }
-    }      
+    } 
+    /**
+ * Muestra las opciones al finalizar una partida.
+ * Permite al jugador decidir si quiere iniciar una nueva o salir del juego.
+ *
+ * @param scanner Scanner para leer la entrada del usuario.
+ * @return true si el jugador quiere jugar una nueva partida, false si quiere salir.
+ */
+private boolean preguntarNuevaPartida(Scanner scanner) {
+    int opcion = 0;
+    while (true) {
+        System.out.println("\n¿Qué deseas hacer ahora?");
+        System.out.println("1. Iniciar una nueva partida");
+        System.out.println("2. Salir del juego");
+        System.out.print("Selecciona una opción (1 o 2): ");
+
+        try {
+            opcion = scanner.nextInt();
+            scanner.nextLine(); // limpiar buffer
+
+            switch (opcion) {
+                case 1:
+                    System.out.println("🟢 Nueva partida iniciada...\n");
+                    return true;
+                case 2:
+                    System.out.println("🔴 Cerrando el juego. ¡Hasta pronto!");
+                    return false;
+                default:
+                    System.out.println("Opción no válida. Introduce 1 o 2.");
+            }
+        } catch (Exception e) {
+            System.out.println("Entrada inválida. Introduce 1 o 2.");
+            scanner.nextLine(); // limpiar entrada errónea
+        }
+    }
+}
+    
 }  
