@@ -21,11 +21,15 @@ El jugador humà juga amb les fitxes `O` i la IA amb `X`.
 
 ## 🧩 Estructura del projecte
 📦 Projecte1_Grup4
+
 ├── game/
 
 │ ├── Mecanica.java         → Control del flux de joc i torns
+
 │ ├── Projecte1_Grup4.java  → Classe principal (main)
+
 │ └── GameText.java         → Textos i missatges per consola
+
 │
 ├── logic/
 │ ├── Node.java         → Representació d’un estat del tauler
