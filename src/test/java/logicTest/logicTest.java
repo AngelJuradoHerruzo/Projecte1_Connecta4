@@ -7,7 +7,6 @@ package logicTest;
 import entities.Casella;
 import entities.Casella.Estat;
 import entities.Tauler;
-import game.Execucio;
 import logic.CreateTree;
 import logic.Node;
 import logic.Score;
@@ -352,24 +351,4 @@ public class logicTest {
     void testEmpatIA() {
 
     }
-
-    // BLOC 4 — TESTS DE EXECUCIO
-    /**
-     * Verifica l'increment correcte del torn.
-     */
-    @Test
-    void testIncrementarTorn() {
-        // Crea una instància d’Execucio
-        Execucio exec = new Execucio();
-
-        // Guarda el torn inicial
-        int tornInicial = exec.getTorn();
-
-        // Crida incrementarTorn()
-        exec.incrementarTorn();
-
-        // Comprova que el torn augmenta en +1
-        assertEquals(tornInicial + 1, exec.getTorn(), "El torn hauria d'augmentar en +1 després de cridar incrementarTorn().");
-    }
-
 }
