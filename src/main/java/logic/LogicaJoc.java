@@ -85,7 +85,7 @@ public class LogicaJoc {
 
     // 2️⃣ Generamos el árbol de movimientos hasta la profundidad indicada
     //    'O' representa a la IA, 'X' al humano
-    CreateTree.treeGeneration(raiz, Casella.Estat.HUMA, 0, profundidad);
+    CreateTree.treeGeneration(raiz, Casella.Estat.IA, 0, profundidad);
 
     // 3️⃣ Llamamos a minimax sobre la raíz
     //    maximizingPlayer = true porque es turno de la IA
